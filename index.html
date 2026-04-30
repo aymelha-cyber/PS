@@ -185,16 +185,38 @@
         .footer-links { display: flex; gap: 30px; font-size: 0.9rem; color: var(--text-muted); font-weight: bold; letter-spacing: 1px; }
         .footer-links a:hover { color: white; cursor: pointer; }
 
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
+        /* MODAL GENEL AYARLARI */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); }
         .modal-content { background-color: #0a0005; margin: 10vh auto; padding: 40px; border: 1px solid rgba(255,255,255,0.2); border-top: 1px solid rgba(255,255,255,0.4); width: 90%; max-width: 500px; border-radius: 12px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); max-height: 80vh; overflow-y: auto; }
         
-        /* Modal Scrollbar Ayarı */
-        .modal-content::-webkit-scrollbar { width: 8px; }
-        .modal-content::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
-        .modal-content::-webkit-scrollbar-thumb { background: rgba(255,0,51,0.5); border-radius: 4px; }
+        /* BÜYÜTÜLMÜŞ KATEGORİ MODALI (YENİ) */
+        .category-modal-content {
+            max-width: 1000px !important; /* Eskiden 700'dü, devasa yapıldı */
+            height: 85vh; /* Yükseklik %85'e sabitlendi */
+            display: flex;
+            flex-direction: column;
+            background: rgba(10,0,5,0.98) !important;
+            border-color: var(--accent-red) !important;
+        }
 
-        .close-btn { color: var(--text-muted); position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; transition: color 0.3s ease; z-index: 10; }
-        .close-btn:hover { color: white; }
+        /* GRID (YAN YANA) SİSTEMİ (YENİ) */
+        .category-feed-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Sığdığı kadar kartı yan yana dizer */
+            gap: 20px;
+            overflow-y: auto;
+            padding-right: 10px;
+            margin-top: 20px;
+            flex-grow: 1; /* Pencerenin kalan tüm boşluğunu kaplar */
+        }
+
+        /* Scrollbar Ayarı */
+        .modal-content::-webkit-scrollbar, .category-feed-container::-webkit-scrollbar { width: 8px; }
+        .modal-content::-webkit-scrollbar-track, .category-feed-container::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
+        .modal-content::-webkit-scrollbar-thumb, .category-feed-container::-webkit-scrollbar-thumb { background: rgba(255,0,51,0.5); border-radius: 4px; }
+
+        .close-btn { color: var(--text-muted); position: absolute; top: 15px; right: 20px; font-size: 32px; font-weight: bold; cursor: pointer; transition: color 0.3s ease; z-index: 10; }
+        .close-btn:hover { color: var(--accent-red); }
         .modal-content h2 { color: white; margin-bottom: 25px; font-size: 1.8rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; text-align: center; }
         
         .auth-input, .post-input { width: 100%; padding: 14px; margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; font-family: var(--font-sans); transition: all 0.3s ease; }
@@ -527,15 +549,15 @@
 
     <!-- MODALS -->
     
-    <!-- Kategori Filtreleme Modalı (YENİ EKLENDİ) -->
+    <!-- Kategori Filtreleme Modalı (DEVASA & GRID) -->
     <div id="categoryModal" class="modal">
-        <div class="modal-content" style="max-width: 700px; background: rgba(10,0,5,0.95); border: 1px solid var(--accent-red);">
+        <div class="modal-content category-modal-content">
             <span class="close-btn" onclick="closeModal('categoryModal')">&times;</span>
-            <h2 id="categoryModalTitle" style="color: var(--accent-red); margin-bottom: 5px;">Category Name</h2>
-            <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px; font-size: 0.9rem;">Browse all creations in this section.</p>
+            <h2 id="categoryModalTitle" style="color: white; margin-bottom: 5px; font-size: 2.2rem; border-bottom: none;">Category Name</h2>
+            <p style="text-align: center; color: var(--accent-red); margin-bottom: 10px; font-size: 0.95rem; font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Browse all creations in this section</p>
             
-            <div id="categoryFeedContainer" class="feed-container" style="margin-top: 0;">
-                <!-- Filtrelenmiş postlar buraya düşecek -->
+            <div id="categoryFeedContainer" class="category-feed-container">
+                <!-- Filtrelenmiş postlar buraya düşecek (Grid şeklinde yan yana) -->
             </div>
         </div>
     </div>
@@ -615,7 +637,7 @@
         </div>
     </div>
 
-    <!-- FİREBASE SİSTEMİ (AUTH + DATABASE + REAL-TIME FEED + FILTERING) -->
+    <!-- FİREBASE SİSTEMİ -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
@@ -741,7 +763,6 @@
         const categoryFeedContainer = document.getElementById('categoryFeedContainer');
         const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
         
-        // Tüm postları hafızada tutacağız
         window.allCommunityPosts = [];
 
         onSnapshot(q, (snapshot) => {
@@ -757,7 +778,7 @@
                 const post = doc.data();
                 if(!post.title) return;
                 
-                window.allCommunityPosts.push(post); // Global listeye ekle
+                window.allCommunityPosts.push(post); 
 
                 let badgeColor = "var(--accent-red)";
                 if (post.category === "Fan Game") badgeColor = "#0066cc";
@@ -777,39 +798,38 @@
                 feedContainer.innerHTML += html; 
             });
             
-            // Eğer o an bir kategori penceresi açıksa onu da güncelle
             if(document.getElementById('categoryModal').style.display === 'block') {
                 const currentCategory = document.getElementById('categoryModalTitle').innerText.replace(' POSTS', '');
                 openCategoryFeed(currentCategory);
             }
         });
 
-        // Kategori Penceresini Açma Fonksiyonu
+        // Kategori Penceresini Açma Fonksiyonu (Yan Yana Grid Kartları)
         window.openCategoryFeed = function(categoryName) {
             document.getElementById('categoryModalTitle').innerText = categoryName.toUpperCase() + " POSTS";
             const container = document.getElementById('categoryFeedContainer');
             container.innerHTML = '';
             
-            // Sadece o kategoriye ait olan postları filtrele
             const filteredPosts = window.allCommunityPosts.filter(post => post.category === categoryName);
             
             if(filteredPosts.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color: var(--text-muted); font-style: italic; padding: 40px 0;">No creations found in this category yet.</p>';
+                container.innerHTML = '<p style="text-align:center; color: var(--text-muted); font-style: italic; padding: 40px 0; width: 100%; grid-column: 1 / -1;">No creations found in this category yet.</p>';
             } else {
                 filteredPosts.forEach(post => {
                     let badgeColor = "var(--accent-red)";
                     if (post.category === "Fan Game") badgeColor = "#0066cc";
                     if (post.category === "Discussion") badgeColor = "#ff9900";
 
+                    // Yeni tasarımda kartlar daha şık ve yan yana dizilecek şekilde yapıldı
                     const html = `
-                        <div class="feed-card glass-card" style="background: rgba(0,0,0,0.6);">
+                        <div class="feed-card glass-card" style="background: rgba(20,0,5,0.8); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column;">
                             <div class="feed-header">
                                 <span class="feed-category" style="background: ${badgeColor};">${post.category}</span>
                                 <span class="feed-author">by @${post.author}</span>
                             </div>
-                            <h3 class="feed-title">${post.title}</h3>
-                            <p class="feed-desc">${post.description}</p>
-                            <a href="${post.link}" target="_blank" class="btn-outline" style="align-self: flex-start; padding: 10px 20px; font-size: 0.8rem; margin-top: 15px;">OPEN LINK &rarr;</a>
+                            <h3 class="feed-title" style="font-size: 1.2rem;">${post.title}</h3>
+                            <p class="feed-desc" style="flex-grow: 1; font-size: 0.9rem;">${post.description}</p>
+                            <a href="${post.link}" target="_blank" class="btn-outline" style="width: 100%; margin-top: 15px; text-align: center;">OPEN LINK &rarr;</a>
                         </div>
                     `;
                     container.innerHTML += html;
