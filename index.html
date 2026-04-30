@@ -185,40 +185,64 @@
         .footer-links { display: flex; gap: 30px; font-size: 0.9rem; color: var(--text-muted); font-weight: bold; letter-spacing: 1px; }
         .footer-links a:hover { color: white; cursor: pointer; }
 
-        /* MODAL GENEL AYARLARI */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); }
+        /* Normal Modallar */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
         .modal-content { background-color: #0a0005; margin: 10vh auto; padding: 40px; border: 1px solid rgba(255,255,255,0.2); border-top: 1px solid rgba(255,255,255,0.4); width: 90%; max-width: 500px; border-radius: 12px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); max-height: 80vh; overflow-y: auto; }
         
-        /* BÜYÜTÜLMÜŞ KATEGORİ MODALI (YENİ) */
-        .category-modal-content {
-            max-width: 1000px !important; /* Eskiden 700'dü, devasa yapıldı */
-            height: 85vh; /* Yükseklik %85'e sabitlendi */
-            display: flex;
-            flex-direction: column;
-            background: rgba(10,0,5,0.98) !important;
-            border-color: var(--accent-red) !important;
-        }
+        .modal-content::-webkit-scrollbar { width: 8px; }
+        .modal-content::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
+        .modal-content::-webkit-scrollbar-thumb { background: rgba(255,0,51,0.5); border-radius: 4px; }
 
-        /* GRID (YAN YANA) SİSTEMİ (YENİ) */
-        .category-feed-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Sığdığı kadar kartı yan yana dizer */
-            gap: 20px;
-            overflow-y: auto;
-            padding-right: 10px;
-            margin-top: 20px;
-            flex-grow: 1; /* Pencerenin kalan tüm boşluğunu kaplar */
-        }
-
-        /* Scrollbar Ayarı */
-        .modal-content::-webkit-scrollbar, .category-feed-container::-webkit-scrollbar { width: 8px; }
-        .modal-content::-webkit-scrollbar-track, .category-feed-container::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
-        .modal-content::-webkit-scrollbar-thumb, .category-feed-container::-webkit-scrollbar-thumb { background: rgba(255,0,51,0.5); border-radius: 4px; }
-
-        .close-btn { color: var(--text-muted); position: absolute; top: 15px; right: 20px; font-size: 32px; font-weight: bold; cursor: pointer; transition: color 0.3s ease; z-index: 10; }
-        .close-btn:hover { color: var(--accent-red); }
+        .close-btn { color: var(--text-muted); position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; transition: color 0.3s ease; z-index: 10; }
+        .close-btn:hover { color: white; }
         .modal-content h2 { color: white; margin-bottom: 25px; font-size: 1.8rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; text-align: center; }
         
+        /* --- YENİ EKLENEN: TAM EKRAN (FULL PAGE) KATEGORİ SAYFASI --- */
+        .full-page-modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; 
+            width: 100%; height: 100%; background-color: var(--bg-color); 
+            background-image: radial-gradient(circle at top center, #2a000a 0%, #050002 60%);
+            overflow-y: auto; animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .fp-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 50px; border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(5,0,2,0.9); position: sticky; top: 0; z-index: 10;
+            backdrop-filter: blur(15px);
+        }
+        .fp-title-area h2 { font-size: 2rem; color: white; margin-bottom: 5px; }
+        .fp-title-area p { color: var(--text-muted); font-size: 0.95rem; }
+        
+        .fp-close-btn { color: var(--text-muted); font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); transition: all 0.3s; }
+        .fp-close-btn:hover { color: white; background: var(--accent-red); transform: rotate(90deg); }
+        
+        .fp-content { padding: 40px 50px; max-width: 1200px; margin: 0 auto; min-height: 100vh; }
+
+        /* Videodaki Şık Kurgu Önerici Banner */
+        .suggest-banner {
+            background: rgba(15,0,5,0.8); border: 1px solid rgba(255,255,255,0.1);
+            border-left: 4px solid #ff6600; border-radius: 12px; padding: 40px; 
+            text-align: center; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .suggest-banner h3 { color: white; font-size: 1.6rem; margin-bottom: 10px; font-family: var(--font-sans); }
+        .suggest-banner p { color: var(--text-muted); margin-bottom: 25px; font-size: 1rem; }
+        .suggest-btn {
+            background: linear-gradient(45deg, #ff6600, #ff0033); color: white;
+            border: none; padding: 14px 30px; border-radius: 8px; font-weight: bold;
+            font-size: 1.1rem; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .suggest-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,102,0,0.4); }
+
+        /* Kategori İçi Grid Sistemi */
+        .category-feed-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
         .auth-input, .post-input { width: 100%; padding: 14px; margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; font-family: var(--font-sans); transition: all 0.3s ease; }
         .auth-input:focus, .post-input:focus { outline: none; border-color: var(--accent-red); background: rgba(20,0,5,0.8); box-shadow: 0 0 10px rgba(255,0,51,0.2); }
         select.post-input option { background: #0a0005; color: white; }
@@ -232,17 +256,14 @@
             .hero-image { height: auto; aspect-ratio: 16/9; }
             .header-content { flex-direction: column; gap: 20px; }
             .hero-text h1 { font-size: 3.2rem; }
-            .showcase-card { flex-direction: column; align-items: center; text-align: center; gap: 20px; }
-            .watch-info { align-self: center; }
-            .hidden-detail-section { padding: 30px 20px; }
-            .square-placeholder { width: 100%; height: auto; aspect-ratio: 1/1; }
+            .fp-header { flex-direction: column; gap: 20px; padding: 20px; text-align: center; }
+            .fp-content { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Header -->
         <header>
             <div class="header-content">
                 <div class="logo-area">
@@ -259,7 +280,6 @@
                         <li id="loginNavLi"><a id="topLoginBtn" class="signup-link no-line" style="cursor:pointer;">LOG IN</a></li>
                         
                         <li id="userPanelLi" class="user-panel">
-                            <button id="newPostBtn" class="btn" style="padding: 8px 16px; font-size: 0.75rem; box-shadow: none;">+ NEW POST</button>
                             <span id="userEmailDisplay" class="user-email"></span>
                             <a id="logoutBtn" class="logout-link no-line">LOGOUT</a>
                         </li>
@@ -268,7 +288,6 @@
             </div>
         </header>
 
-        <!-- 1. Hero Section -->
         <section class="hero">
             <div class="hero-text">
                 <h1>ENTER THE <br><span>PERTHSANTA UNIVERSE</span></h1>
@@ -278,7 +297,6 @@
             <img src="enter-universe.jfif" alt="Enter the Universe" class="content-image hero-image">
         </section>
 
-        <!-- 2. Who is PerthSanta Section -->
         <section id="about" class="about-ps glass-card">
             <div style="display: flex; gap: 40px; align-items: center; width: 100%; flex-wrap: wrap;">
                 <img src="about-perthsanta.jfif" alt="Who is PerthSanta" class="content-image" style="width: 320px; height: 320px; flex-shrink: 0;">
@@ -293,7 +311,6 @@
                 </div>
             </div>
 
-            <!-- Karakter Profil Kartları -->
             <div class="profile-grid">
                 <div class="profile-card glass-card">
                     <img src="perth.jfif" alt="Perth Tanapon" class="profile-img">
@@ -356,7 +373,6 @@
             </div>
         </section>
 
-        <!-- 3. Official Content Cards -->
         <section id="official" class="official-content">
             <div class="card glass-card">
                 <div class="card-icon">🎬</div>
@@ -373,7 +389,6 @@
             </div>
         </section>
 
-        <!-- 4. GİZLİ DETAY: SERIES -->
         <section id="series-detailed" class="hidden-detail-section glass-card">
             <div class="detail-header">
                 <h2>PERTHSANTA SERIES</h2>
@@ -423,7 +438,6 @@
             </div>
         </section>
 
-        <!-- 5. GİZLİ DETAY: MUSIC -->
         <section id="music-detailed" class="hidden-detail-section glass-card">
             <div class="detail-header">
                 <h2>PERTHSANTA & THEIR MUSIC</h2>
@@ -483,37 +497,32 @@
             </div>
         </section>
 
-        <!-- 6. Community Section -->
         <section id="community" class="community-area glass-card">
             <div class="detail-header" style="margin-bottom: 50px;">
                 <h2>JOIN THE COMMUNITY</h2>
                 <p>CONNECT, CREATE, AND SHARE WITH OTHER FANS</p>
             </div>
 
-            <!-- Kategori Vitrin Kartları -->
             <div class="community-grid">
                 <div class="community-card glass-card">
                     <div class="comm-icon">📝</div>
                     <h3>FAN FICTION</h3>
                     <p>Share your story links and explore emotional character arcs written by fellow fans.</p>
-                    <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
-                        <button class="btn-outline" style="width: 100%;" onclick="openCategoryFeed('Fan Fiction')">BROWSE FICS</button>
-                        <button onclick="openRandomFic()" class="btn" style="width: 100%; font-size: 0.8rem; background: #fff; color: #000; box-shadow: none;">🎲 RANDOM FIC</button>
-                    </div>
+                    <button class="btn" style="width: 100%; margin-top: auto;" onclick="openCategoryPage('Fan Fiction')">BROWSE FICS &rarr;</button>
                 </div>
 
                 <div class="community-card glass-card">
                     <div class="comm-icon">🎮</div>
                     <h3>FAN GAMES</h3>
                     <p>Explore interactive web-based fan games, escape rooms, and coding projects.</p>
-                    <button class="btn-outline" style="width: 100%; margin-top: auto;" onclick="openCategoryFeed('Fan Game')">BROWSE GAMES</button>
+                    <button class="btn" style="width: 100%; margin-top: auto;" onclick="openCategoryPage('Fan Game')">BROWSE GAMES &rarr;</button>
                 </div>
 
                 <div class="community-card glass-card">
                     <div class="comm-icon">💬</div>
                     <h3>DISCUSSIONS</h3>
                     <p>Talk about episode theories, character analysis, and connect with the global fanbase.</p>
-                    <button class="btn-outline" style="width: 100%; margin-top: auto;" onclick="openCategoryFeed('Discussion')">BROWSE DISCUSSIONS</button>
+                    <button class="btn" style="width: 100%; margin-top: auto;" onclick="openCategoryPage('Discussion')">DISCUSSIONS &rarr;</button>
                 </div>
             </div>
             
@@ -522,10 +531,9 @@
                 <button id="bottomSignupBtn" class="btn" style="padding: 16px 50px; font-size: 1.1rem;">JOIN & SIGN UP &rarr;</button>
             </div>
 
-            <!-- CANLI POST AKIŞI (GENEL FEED) -->
             <div style="margin-top: 80px; padding-top: 40px; border-top: 2px dashed rgba(255,0,51,0.3);">
-                <h2 style="font-family: var(--font-serif); font-size: 2rem; color: white; margin-bottom: 10px; text-align: center;">LATEST FROM THE COMMUNITY</h2>
-                <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px;">Discover the newest creations and discussions from fans around the universe.</p>
+                <h2 style="font-family: var(--font-serif); font-size: 2rem; color: white; margin-bottom: 10px; text-align: center;">LATEST UPDATES</h2>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px;">The newest creations across the universe.</p>
                 
                 <div id="communityFeed" class="feed-container">
                     <p style="text-align:center; color: var(--text-muted);">Loading universe data...</p>
@@ -533,7 +541,6 @@
             </div>
         </section>
 
-        <!-- Footer -->
         <footer>
             <div class="logo-area">
                 <img src="logo.png" alt="Logo" class="logo-img" style="width: 35px; height: 35px;">
@@ -547,22 +554,32 @@
         </footer>
     </div>
 
-    <!-- MODALS -->
-    
-    <!-- Kategori Filtreleme Modalı (DEVASA & GRID) -->
-    <div id="categoryModal" class="modal">
-        <div class="modal-content category-modal-content">
-            <span class="close-btn" onclick="closeModal('categoryModal')">&times;</span>
-            <h2 id="categoryModalTitle" style="color: white; margin-bottom: 5px; font-size: 2.2rem; border-bottom: none;">Category Name</h2>
-            <p style="text-align: center; color: var(--accent-red); margin-bottom: 10px; font-size: 0.95rem; font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Browse all creations in this section</p>
+    <div id="categoryPage" class="full-page-modal">
+        <div class="fp-header">
+            <div class="fp-title-area">
+                <h2 id="catPageTitle">Fic Archive</h2>
+                <p id="catPageSubtitle">Explore stories written by the community.</p>
+            </div>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <button id="catAddBtn" class="btn" style="background: linear-gradient(45deg, #0055ff, #0099ff); box-shadow: 0 5px 15px rgba(0,102,255,0.4);" onclick="document.getElementById('newPostBtn').click()">+ Add a Fic</button>
+                <a class="fp-close-btn" onclick="closeCategoryPage()">&#10005;</a>
+            </div>
+        </div>
+        
+        <div class="fp-content">
+            <div id="suggestBanner" class="suggest-banner">
+                <h3>Not sure what to read today?</h3>
+                <p>Let the archive pick a random story for you!</p>
+                <button class="suggest-btn" onclick="openRandomFic()">🎲 Suggest Me a Fic!</button>
+            </div>
+            
+            <h3 style="color: white; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 20px; font-family: var(--font-serif); font-size: 1.5rem;">Archive Contents</h3>
             
             <div id="categoryFeedContainer" class="category-feed-container">
-                <!-- Filtrelenmiş postlar buraya düşecek (Grid şeklinde yan yana) -->
-            </div>
+                </div>
         </div>
     </div>
 
-    <!-- Giriş/Kayıt (Auth) Modalı -->
     <div id="authModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeAuthBtn">&times;</span>
@@ -581,7 +598,6 @@
         </div>
     </div>
 
-    <!-- Yeni Post Paylaşma (Veritabanı) Modalı -->
     <div id="postModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closePostBtn">&times;</span>
@@ -603,7 +619,6 @@
         </div>
     </div>
 
-    <!-- Diğer Bilgi Modalları -->
     <div id="aboutModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('aboutModal')">&times;</span>
@@ -637,7 +652,6 @@
         </div>
     </div>
 
-    <!-- FİREBASE SİSTEMİ -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
@@ -659,6 +673,7 @@
         // -- MODAL KONTROLLERİ --
         const authModal = document.getElementById('authModal');
         const postModal = document.getElementById('postModal');
+        
         let currentAuthMode = 'login';
         
         function openAuth(mode) {
@@ -674,7 +689,21 @@
         document.getElementById('topLoginBtn').addEventListener('click', () => openAuth('login'));
         document.getElementById('bottomSignupBtn').addEventListener('click', () => openAuth('signup'));
         document.getElementById('closeAuthBtn').addEventListener('click', () => authModal.style.display = 'none');
-        document.getElementById('newPostBtn').addEventListener('click', () => postModal.style.display = 'block');
+        
+        // Yeni post eklendiğinde kategori oto-seçimi
+        document.getElementById('newPostBtn').addEventListener('click', () => {
+            const pageTitle = document.getElementById('catPageTitle').innerText;
+            const categorySelect = document.getElementById('postCategory');
+            if(document.getElementById('categoryPage').style.display === 'block') {
+                if(pageTitle.includes('Fic')) categorySelect.value = "Fan Fiction";
+                else if(pageTitle.includes('Interactive')) categorySelect.value = "Fan Game";
+                else if(pageTitle.includes('Discussions')) categorySelect.value = "Discussion";
+            } else {
+                categorySelect.value = "";
+            }
+            postModal.style.display = 'block';
+        });
+        
         document.getElementById('closePostBtn').addEventListener('click', () => postModal.style.display = 'none');
         document.getElementById('switchAuthModeBtn').addEventListener('click', () => { openAuth(currentAuthMode === 'signup' ? 'login' : 'signup'); });
 
@@ -726,6 +755,14 @@
 
         postForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            // Misafir kontrolü
+            if(!auth.currentUser) {
+                postMessage.style.color = "var(--accent-red)";
+                postMessage.innerText = "You must be logged in to share a post.";
+                return;
+            }
+
             postSubmitBtn.disabled = true;
             postSubmitBtn.innerText = "SENDING...";
             postMessage.innerText = "";
@@ -758,9 +795,8 @@
             }
         });
 
-        // -- 3. CANLI POST AKIŞI VE FİLTRELEME (REAL-TIME FEED & BROWSE) --
+        // -- 3. CANLI POST AKIŞI VE TAM EKRAN KATEGORİSİ --
         const feedContainer = document.getElementById('communityFeed');
-        const categoryFeedContainer = document.getElementById('categoryFeedContainer');
         const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
         
         window.allCommunityPosts = [];
@@ -798,29 +834,56 @@
                 feedContainer.innerHTML += html; 
             });
             
-            if(document.getElementById('categoryModal').style.display === 'block') {
-                const currentCategory = document.getElementById('categoryModalTitle').innerText.replace(' POSTS', '');
-                openCategoryFeed(currentCategory);
+            // Tam ekran kategori sayfası açıksa onu da güncelle
+            if(document.getElementById('categoryPage').style.display === 'block') {
+                const currentCategory = document.getElementById('catPageTitle').innerText;
+                if(currentCategory.includes('Fic')) openCategoryPage('Fan Fiction');
+                else if(currentCategory.includes('Interactive')) openCategoryPage('Fan Game');
+                else openCategoryPage('Discussion');
             }
         });
 
-        // Kategori Penceresini Açma Fonksiyonu (Yan Yana Grid Kartları)
-        window.openCategoryFeed = function(categoryName) {
-            document.getElementById('categoryModalTitle').innerText = categoryName.toUpperCase() + " POSTS";
+        // 🌟 YENİ: TAM EKRAN (FULL PAGE) KATEGORİ ARŞİVİ AÇMA 🌟
+        window.openCategoryPage = function(categoryName) {
+            let title = "", subtitle = "", btnText = "";
+            const suggestBanner = document.getElementById('suggestBanner');
+
+            // Kategoriye göre metinleri ve butonları ayarla
+            if (categoryName === "Fan Fiction") {
+                title = "Fic Archive";
+                subtitle = "Explore stories written by the community.";
+                btnText = "+ Add a Fic";
+                suggestBanner.style.display = "block"; // Fic önerisini sadece burada göster
+            } else if (categoryName === "Fan Game") {
+                title = "Projects / Interactive";
+                subtitle = "Check out fan-made games and interactive projects.";
+                btnText = "+ Add a Game";
+                suggestBanner.style.display = "none";
+            } else {
+                title = "Discussions Archive";
+                subtitle = "Theories, episode discussions, and community talks.";
+                btnText = "+ Add a Post";
+                suggestBanner.style.display = "none";
+            }
+
+            document.getElementById('catPageTitle').innerText = title;
+            document.getElementById('catPageSubtitle').innerText = subtitle;
+            document.getElementById('catAddBtn').innerText = btnText;
+
             const container = document.getElementById('categoryFeedContainer');
             container.innerHTML = '';
             
             const filteredPosts = window.allCommunityPosts.filter(post => post.category === categoryName);
             
             if(filteredPosts.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color: var(--text-muted); font-style: italic; padding: 40px 0; width: 100%; grid-column: 1 / -1;">No creations found in this category yet.</p>';
+                container.innerHTML = '<p style="text-align:left; color: var(--text-muted); font-style: italic; padding: 20px 0; grid-column: 1 / -1;">No creations found in this category yet.</p>';
             } else {
                 filteredPosts.forEach(post => {
                     let badgeColor = "var(--accent-red)";
                     if (post.category === "Fan Game") badgeColor = "#0066cc";
                     if (post.category === "Discussion") badgeColor = "#ff9900";
 
-                    // Yeni tasarımda kartlar daha şık ve yan yana dizilecek şekilde yapıldı
+                    // Kartlar yan yana dizilecek (Grid Sistemi)
                     const html = `
                         <div class="feed-card glass-card" style="background: rgba(20,0,5,0.8); border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column;">
                             <div class="feed-header">
@@ -836,14 +899,24 @@
                 });
             }
             
-            openModal('categoryModal');
+            // Sayfayı tam ekran aç ve arkadaki ana sayfanın kaymasını engelle
+            document.getElementById('categoryPage').style.display = 'block';
+            document.body.style.overflow = 'hidden'; 
+            
+            // Sayfanın en üstüne kaydır
+            document.getElementById('categoryPage').scrollTop = 0;
+        }
+
+        window.closeCategoryPage = function() {
+            document.getElementById('categoryPage').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Ana sayfanın kaymasını geri aç
         }
 
         // Random Fic Fonksiyonu
         window.openRandomFic = function() {
             const fics = window.allCommunityPosts.filter(post => post.category === "Fan Fiction");
             if(fics.length === 0) {
-                alert("There are no fan fictions in the database yet. Share one!");
+                alert("There are no fan fictions in the database yet. Be the first to add one!");
                 return;
             }
             const random = Math.floor(Math.random() * fics.length);
@@ -853,7 +926,6 @@
 
     </script>
 
-    <!-- UI Fonksiyonları -->
     <script>
         function toggleSection(id) {
             const section = document.getElementById(id);
