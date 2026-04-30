@@ -22,7 +22,6 @@
 
         body {
             background-color: var(--bg-color);
-            /* Sabit ama zengin Grid ve Işık hüzmesi arka planı */
             background-image: 
                 radial-gradient(circle at 15% 20%, rgba(138, 0, 28, 0.25) 0%, transparent 40%),
                 radial-gradient(circle at 85% 80%, rgba(255, 0, 51, 0.15) 0%, transparent 40%),
@@ -45,7 +44,7 @@
             background: var(--glass-bg);
             border-radius: 16px;
             border: 1px solid rgba(255,255,255,0.05);
-            border-top: 1px solid rgba(255,255,255,0.2); /* 3D Işık Efekti */
+            border-top: 1px solid rgba(255,255,255,0.2); 
             border-left: 1px solid rgba(255,255,255,0.1);
             box-shadow: 10px 10px 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,0,51,0.05);
             backdrop-filter: blur(10px);
@@ -81,7 +80,8 @@
             transition: all 0.3s ease;
         }
 
-        .btn:hover { box-shadow: 0 0 20px rgba(255, 0, 51, 0.7); transform: translateY(-2px); }
+        .btn:hover:not(:disabled) { box-shadow: 0 0 20px rgba(255, 0, 51, 0.7); transform: translateY(-2px); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .btn-outline:hover { background: white; color: var(--bg-color); border-color: white; }
 
         /* Header */
@@ -94,9 +94,16 @@
         nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: var(--accent-red); transition: width 0.3s; }
         nav a:hover::after { width: 100%; }
         nav a:hover { color: #fff; }
+        
+        /* Dinamik Giriş/Çıkış Butonu Stilleri */
         .signup-link { background: var(--accent-red); color: white !important; padding: 8px 18px; border-radius: 6px; border-top: 1px solid rgba(255,255,255,0.5); box-shadow: 0 0 10px rgba(255,0,51,0.3); }
         .signup-link::after { display: none; }
         .signup-link:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(255,0,51,0.6); }
+        
+        .user-panel { display: none; align-items: center; gap: 15px; }
+        .user-email { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1px; }
+        .logout-link { color: white; padding: 6px 12px; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; font-size: 0.75rem; transition: all 0.3s; }
+        .logout-link:hover { background: rgba(255,255,255,0.1); }
 
         /* 1. Hero Section */
         .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-bottom: 100px; align-items: center; }
@@ -196,14 +203,16 @@
         .footer-links a:hover { color: white; cursor: pointer; }
 
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
-        .modal-content { background-color: #0a0005; margin: 10vh auto; padding: 40px; border: 1px solid rgba(255,255,255,0.2); border-top: 1px solid rgba(255,255,255,0.4); width: 90%; max-width: 500px; border-radius: 12px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+        .modal-content { background-color: #0a0005; margin: 10vh auto; padding: 40px; border: 1px solid rgba(255,255,255,0.2); border-top: 1px solid rgba(255,255,255,0.4); width: 90%; max-width: 450px; border-radius: 12px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
         .close-btn { color: var(--text-muted); position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; transition: color 0.3s ease; }
         .close-btn:hover { color: white; }
-        .modal-content h2 { color: white; margin-bottom: 25px; font-size: 1.8rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; text-align: center; }
+        .modal-content h2 { color: white; margin-bottom: 10px; font-size: 1.8rem; text-align: center; }
         
         /* Form Inputs */
         .auth-input { width: 100%; padding: 14px; margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; font-family: var(--font-sans); transition: all 0.3s ease; }
         .auth-input:focus { outline: none; border-color: var(--accent-red); background: rgba(20,0,5,0.8); box-shadow: 0 0 10px rgba(255,0,51,0.2); }
+        
+        #authError { color: var(--accent-red); font-size: 0.85rem; text-align: center; margin-bottom: 10px; min-height: 20px; font-weight: bold; }
 
         /* Responsive */
         @media (max-width: 900px) {
@@ -234,7 +243,12 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#official">Universe</a></li>
                         <li><a href="#community">Community</a></li>
-                        <li><a onclick="openModal('authModal')" class="signup-link">SIGN UP</a></li>
+                        <!-- DİNAMİK GİRİŞ SİSTEMİ EKLENDİ -->
+                        <li id="loginNavLi"><a onclick="openAuthModal('login')" class="signup-link">LOG IN</a></li>
+                        <li id="userPanelLi" class="user-panel">
+                            <span id="userEmailDisplay" class="user-email"></span>
+                            <a onclick="logoutUser()" class="logout-link">Logout</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -388,7 +402,7 @@
                     </div>
                 </div>
 
-                <!-- The Spooky Love Tale (YENİ) -->
+                <!-- The Spooky Love Tale -->
                 <div class="showcase-card glass-card">
                     <div class="square-placeholder">
                         <img src="slt-square.jfif" alt="The Spooky Love Tale">
@@ -486,7 +500,7 @@
                     <p>Share your story links (AO3, Wattpad) and explore emotional character arcs written by fellow fans.</p>
                     <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
                         <button class="btn-outline" style="width: 100%;">SHARE A STORY</button>
-                        <button onclick="randomFic()" class="btn" style="width: 100%; font-size: 0.8rem; background: #fff; color: #000;">🎲 RANDOM FIC</button>
+                        <button onclick="randomFic()" class="btn" style="width: 100%; font-size: 0.8rem; background: #fff; color: #000; box-shadow: none;">🎲 RANDOM FIC</button>
                     </div>
                 </div>
 
@@ -505,9 +519,9 @@
                 </div>
             </div>
             
-            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+            <div id="joinCommunityPrompt" style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
                 <p style="margin-bottom: 15px; color: var(--text-muted);">Ready to share your own creations?</p>
-                <button onclick="openModal('authModal')" class="btn" style="padding: 16px 50px; font-size: 1.1rem;">JOIN & SIGN UP &rarr;</button>
+                <button onclick="openAuthModal('signup')" class="btn" style="padding: 16px 50px; font-size: 1.1rem;">JOIN & SIGN UP &rarr;</button>
             </div>
         </section>
 
@@ -527,19 +541,25 @@
 
     <!-- MODALS -->
     
-    <!-- Kayıt Olma (Sign Up) Modalı -->
+    <!-- Giriş/Kayıt (Auth) Modalı -->
     <div id="authModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('authModal')">&times;</span>
-            <h2>Create Your Account</h2>
-            <p style="text-align: center; margin-bottom: 25px;">Join the universe to post your fics, games, and join the discussion.</p>
-            <form onsubmit="event.preventDefault(); alert('Kayıt sistemi yapım aşamasında! Veritabanı bağlandığında çalışacak.'); closeModal('authModal');">
-                <input type="text" class="auth-input" placeholder="Username" required>
-                <input type="email" class="auth-input" placeholder="Email Address" required>
-                <input type="password" class="auth-input" placeholder="Password" required>
-                <button type="submit" class="btn" style="width: 100%; margin-top: 10px; padding: 16px;">SIGN UP</button>
+            <h2 id="authTitle">Sign Up</h2>
+            <p id="authSubtitle" style="text-align: center; margin-bottom: 20px; color: var(--text-muted); font-size: 0.9rem;">Create an account to join the community.</p>
+            
+            <div id="authError"></div>
+            
+            <form id="authForm">
+                <input type="email" id="authEmail" class="auth-input" placeholder="Email Address" required>
+                <input type="password" id="authPassword" class="auth-input" placeholder="Password (min 6 chars)" required minlength="6">
+                <button type="submit" id="authSubmitBtn" class="btn" style="width: 100%; margin-top: 5px; padding: 14px;">SIGN UP</button>
             </form>
-            <p style="text-align: center; margin-top: 20px; font-size: 0.85rem; cursor: pointer;">Already have an account? <span style="color: var(--accent-red); font-weight: bold;">Log in</span></p>
+            
+            <p style="text-align: center; margin-top: 20px; font-size: 0.85rem;">
+                <span id="authToggleText">Already have an account?</span> 
+                <span onclick="toggleAuthMode()" style="color: var(--accent-red); font-weight: bold; cursor: pointer; text-decoration: underline;">Switch</span>
+            </p>
         </div>
     </div>
 
@@ -577,27 +597,151 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- FİREBASE SİSTEMİ (BEYİN) BURADAN BAŞLIYOR -->
+    <!-- Firebase'in SDK'larını dışarıdan çağırıyoruz (Type: module olmak zorunda) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+        // Senin verdiğin Firebase Bağlantı Anahtarları
+        const firebaseConfig = {
+          apiKey: "AIzaSyAWA9jd1ud0F7aLuqY6L_Fy4f0JhgO12lk",
+          authDomain: "perthsanta-universe.firebaseapp.com",
+          projectId: "perthsanta-universe",
+          storageBucket: "perthsanta-universe.firebasestorage.app",
+          messagingSenderId: "721217348915",
+          appId: "1:721217348915:web:ccc69dc06c313acae34a46"
+        };
+
+        // Firebase'i Başlat
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // UI Elementlerini Seçme
+        const authForm = document.getElementById('authForm');
+        const emailInput = document.getElementById('authEmail');
+        const passwordInput = document.getElementById('authPassword');
+        const errorDiv = document.getElementById('authError');
+        const submitBtn = document.getElementById('authSubmitBtn');
+        const authModal = document.getElementById('authModal');
+        
+        // Navigation Değişen Kısımlar
+        const loginNavLi = document.getElementById('loginNavLi');
+        const userPanelLi = document.getElementById('userPanelLi');
+        const userEmailDisplay = document.getElementById('userEmailDisplay');
+        const joinCommunityPrompt = document.getElementById('joinCommunityPrompt');
+
+        // Global Değişken: Şu an "login" mi yoksa "signup" modunda mıyız?
+        window.currentAuthMode = 'signup';
+
+        // Mod Değiştirici (Signup <-> Login)
+        window.toggleAuthMode = function() {
+            window.currentAuthMode = window.currentAuthMode === 'signup' ? 'login' : 'signup';
+            document.getElementById('authTitle').innerText = window.currentAuthMode === 'signup' ? 'Sign Up' : 'Log In';
+            document.getElementById('authSubtitle').innerText = window.currentAuthMode === 'signup' ? 'Create an account to join the community.' : 'Welcome back to the universe.';
+            submitBtn.innerText = window.currentAuthMode === 'signup' ? 'SIGN UP' : 'LOG IN';
+            document.getElementById('authToggleText').innerText = window.currentAuthMode === 'signup' ? 'Already have an account?' : 'Need an account?';
+            errorDiv.innerText = '';
+        }
+
+        // Dışarıdan modal açmak için global fonksiyon
+        window.openAuthModal = function(mode) {
+            if(window.currentAuthMode !== mode) window.toggleAuthMode();
+            authModal.style.display = 'block';
+        }
+
+        // Form Gönderildiğinde (Kayıt veya Giriş)
+        authForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerText = "WAIT...";
+            errorDiv.innerText = "";
+
+            if (window.currentAuthMode === 'signup') {
+                // KAYIT OLMA İŞLEMİ
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        authModal.style.display = 'none';
+                        authForm.reset();
+                    })
+                    .catch((error) => {
+                        errorDiv.innerText = getFriendlyErrorMessage(error.code);
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = "SIGN UP";
+                    });
+            } else {
+                // GİRİŞ YAPMA İŞLEMİ
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        authModal.style.display = 'none';
+                        authForm.reset();
+                    })
+                    .catch((error) => {
+                        errorDiv.innerText = "Invalid email or password.";
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = "LOG IN";
+                    });
+            }
+        });
+
+        // Hata Mesajlarını Güzelleştirme
+        function getFriendlyErrorMessage(errorCode) {
+            switch (errorCode) {
+                case 'auth/email-already-in-use': return "This email is already registered.";
+                case 'auth/invalid-email': return "Please enter a valid email.";
+                case 'auth/weak-password': return "Password must be at least 6 characters.";
+                default: return "An error occurred. Please try again.";
+            }
+        }
+
+        // SİHİRLİ KISIM: Kullanıcı Girdiğinde/Çıktığında Sayfayı Değiştir
+        onAuthStateChanged(auth, (user) => {
+            submitBtn.disabled = false; // Formu tekrar aç
+            submitBtn.innerText = window.currentAuthMode === 'signup' ? 'SIGN UP' : 'LOG IN';
+
+            if (user) {
+                // GİRİŞ YAPILMIŞSA
+                loginNavLi.style.display = 'none';
+                userPanelLi.style.display = 'flex';
+                // E-postanın başını göster (örn: laylay@... yerine laylay)
+                userEmailDisplay.innerText = "Hi, " + user.email.split('@')[0]; 
+                joinCommunityPrompt.style.display = 'none'; // Aşağıdaki "Kayıt ol" uyarısını gizle
+            } else {
+                // ÇIKIŞ YAPILMIŞSA VEYA KİMSE YOKSA
+                loginNavLi.style.display = 'block';
+                userPanelLi.style.display = 'none';
+                userEmailDisplay.innerText = "";
+                joinCommunityPrompt.style.display = 'block';
+            }
+        });
+
+        // Çıkış Yapma Fonksiyonu
+        window.logoutUser = function() {
+            signOut(auth).then(() => {
+                alert("Logged out successfully.");
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
+    </script>
+
+    <!-- Normal (Eski) JavaScript Fonksiyonları -->
     <script>
         function toggleSection(id) {
             const section = document.getElementById(id);
             if (section.style.display === "none" || section.style.display === "") {
                 section.style.display = "block";
-                setTimeout(() => {
-                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 50);
+                setTimeout(() => { section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
             } else {
                 section.style.display = "none";
             }
         }
 
-        function openModal(id) {
-            document.getElementById(id).style.display = "block";
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).style.display = "none";
-        }
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
 
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
@@ -607,15 +751,14 @@
 
         // Rastgele Fic Seçici
         function randomFic() {
-            // Sisteme yazarlar hikaye yükledikçe bu dizi (array) dolacak.
             const fics = [
                 "https://www.wattpad.com/story/placeholder-what-we-dont-remember", 
                 "https://archiveofourown.org/works/placeholder-warm-you-up"
             ];
-            
             const random = Math.floor(Math.random() * fics.length);
-            alert("Rastgele bir hikaye seçiliyor! (Sistem bağlandığında otomatik olarak yeni sekmeye yönlendirecek)");
-            // window.open(fics[random], '_blank'); // Gerçekte bunu kullanacağız
+            // Şimdilik alert, linkler eklendiğinde açılacak:
+            alert("Rastgele bir hikaye seçiliyor! (Veritabanına eklendiğinde direkt açılacak)");
+            // window.open(fics[random], '_blank'); 
         }
     </script>
 </body>
