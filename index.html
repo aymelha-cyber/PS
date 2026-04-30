@@ -11,7 +11,7 @@
             --bg-color: #030000;
             --text-main: #ffffff;
             --text-muted: #b3b3b3;
-            --accent-red: #ff0033; /* Daha parlak, neon bir kırmızı */
+            --accent-red: #ff0033; 
             --dark-red: #8a001c;
             --border-color: #4a000f;
             --card-bg: linear-gradient(145deg, #0a0005, #140005);
@@ -20,7 +20,7 @@
             --font-sans: 'Inter', sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-color);
@@ -50,7 +50,7 @@
             box-shadow: var(--neon-glow);
         }
 
-        /* Buttons (Çarpıcı Neon Efektleri) */
+        /* Buttons */
         .btn {
             display: inline-flex; justify-content: center; align-items: center; gap: 10px;
             background: linear-gradient(45deg, var(--dark-red), var(--accent-red));
@@ -91,15 +91,12 @@
         .hero-image { width: 100%; height: 450px; border-radius: 8px; }
 
         /* 2. Who is PerthSanta Section */
-        .about-ps { border: 1px solid var(--border-color); background: var(--card-bg); border-radius: 12px; padding: 50px; display: flex; gap: 50px; align-items: center; margin-bottom: 80px; position: relative; overflow: hidden; }
+        .about-ps { border: 1px solid var(--border-color); background: var(--card-bg); border-radius: 12px; padding: 50px; display: flex; flex-direction: column; gap: 30px; align-items: flex-start; margin-bottom: 80px; position: relative; overflow: hidden; }
         .about-ps::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent-red); box-shadow: var(--neon-glow); }
-        .about-image { width: 320px; height: 320px; flex-shrink: 0; border-radius: 8px; }
-        .about-text h2 { color: var(--text-main); margin-bottom: 20px; font-size: 2.5rem; letter-spacing: 2px; }
-        .about-text p { color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem; line-height: 1.8; }
-
-        /* 3. Official Content (Cards - Daha Çarpıcı) */
-        .official-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 100px; }
-        .card { border: 1px solid var(--border-color); background: var(--card-bg); padding: 40px; display: flex; gap: 30px; border-radius: 12px; transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden; }
+        
+        /* 3. Official Content Cards */
+        .official-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
+        .card { border: 1px solid var(--border-color); background: var(--card-bg); padding: 40px; display: flex; gap: 30px; border-radius: 12px; transition: all 0.4s ease; position: relative; overflow: hidden; }
         .card:hover { border-color: var(--accent-red); box-shadow: var(--neon-glow); transform: translateY(-5px); }
         .card-text { flex: 1; display: flex; flex-direction: column; justify-content: space-between; z-index: 2; }
         .card-icon { font-size: 2.5rem; color: var(--accent-red); margin-bottom: 15px; filter: drop-shadow(0 0 10px rgba(255,0,51,0.4)); }
@@ -107,7 +104,50 @@
         .card p { color: var(--text-muted); font-size: 1rem; margin-bottom: 25px; line-height: 1.7; }
         .card-image { width: 220px; height: 260px; border-radius: 8px; z-index: 2; }
 
-        /* 4. Community Section */
+        /* 4. Detailed Series Showcase */
+        .series-showcase { margin-bottom: 100px; scroll-margin-top: 100px; }
+        .series-showcase-header { text-align: center; margin-bottom: 50px; }
+        .series-showcase-header h2 { font-size: 2.5rem; color: var(--text-main); letter-spacing: 2px; }
+        .series-showcase-header p { color: var(--accent-red); font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; font-weight: bold; }
+        
+        .showcase-grid { display: flex; flex-direction: column; gap: 40px; }
+        .showcase-card { display: flex; background: rgba(10,0,5,0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px; gap: 40px; transition: all 0.3s ease; }
+        .showcase-card:hover { border-color: var(--accent-red); background: rgba(20,0,10,0.6); box-shadow: 0 0 20px rgba(255,0,51,0.1); transform: translateX(5px); }
+        
+        .square-placeholder { width: 250px; height: 250px; flex-shrink: 0; border: 1px dashed var(--accent-red); background: #050000; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--dark-red); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; overflow: hidden; }
+        .square-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .showcase-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .showcase-info h3 { font-size: 2rem; color: var(--text-main); margin-bottom: 15px; letter-spacing: 1px; }
+        .showcase-info p { color: var(--text-muted); line-height: 1.7; margin-bottom: 25px; font-size: 1rem; }
+        .showcase-info strong { color: var(--text-main); }
+        
+        .watch-info { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,0,51,0.1); border-left: 3px solid var(--accent-red); padding: 12px 20px; border-radius: 0 4px 4px 0; color: var(--text-main); font-size: 0.95rem; font-weight: bold; align-self: flex-start; }
+        .watch-icon { color: var(--accent-red); font-size: 1.2rem; }
+
+        /* 5. Detailed Music Showcase */
+        .music-showcase { margin-bottom: 100px; scroll-margin-top: 100px; }
+        .music-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .music-card { background: rgba(10,0,5,0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 35px; display: flex; flex-direction: column; transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .music-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-red); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+        .music-card:hover { border-color: var(--accent-red); background: rgba(20,0,10,0.6); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255,0,51,0.1); }
+        .music-card:hover::before { transform: scaleX(1); }
+
+        .music-icon { font-size: 2.5rem; margin-bottom: 20px; color: var(--accent-red); }
+        .music-card h3 { font-size: 1.4rem; color: var(--text-main); margin-bottom: 15px; letter-spacing: 1px; }
+        .music-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+        
+        /* Şarkı listesi için container */
+        .song-list { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+        .yt-link { display: inline-flex; align-items: center; justify-content: flex-start; gap: 10px; background: #200005; border: 1px solid #ff0000; color: white; padding: 12px 15px; border-radius: 6px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; width: 100%; }
+        .yt-link:hover { background: #ff0000; box-shadow: 0 0 15px rgba(255,0,0,0.5); color: white; transform: translateX(5px); }
+        .yt-link span { color: #ff0000; font-size: 1.2rem; }
+        .yt-link:hover span { color: white; }
+        
+        .duo-card { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(20,0,5,0.8), rgba(138,0,28,0.3)); border-color: var(--accent-red); }
+
+        /* 6. Community Section */
         .community-area { border: 1px solid var(--border-color); border-radius: 12px; padding: 60px 40px; margin-bottom: 100px; background: var(--card-bg); position: relative; }
         .section-header { text-align: center; margin-bottom: 50px; }
         .section-header h2 { font-size: 2.8rem; color: var(--text-main); letter-spacing: 3px; text-shadow: 0 0 20px rgba(255,0,51,0.2); }
@@ -121,12 +161,11 @@
         .community-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px; flex-grow: 1; line-height: 1.6; }
         .comm-btn-wrapper { text-align: center; margin-top: 20px; }
 
-        /* 5. Latest Updates Section (Boş/Dinamik Yapı) */
+        /* 7. Latest Updates Section */
         .latest-updates { margin-bottom: 100px; }
         .latest-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 40px; }
         .latest-header h2 { font-size: 2rem; letter-spacing: 2px; color: var(--text-main); }
         
-        /* Bekleme Durumu (Boş Tasarım) */
         .empty-state { border: 1px dashed var(--dark-red); border-radius: 12px; padding: 60px 20px; text-align: center; background: rgba(10,0,5,0.3); }
         .empty-state p { color: var(--text-main); font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; }
         .empty-state span { color: var(--text-muted); font-size: 0.9rem; }
@@ -138,10 +177,14 @@
 
         /* Responsive */
         @media (max-width: 900px) {
-            .hero, .official-content, .community-grid, .about-ps { grid-template-columns: 1fr; flex-direction: column; gap: 30px; }
+            .hero, .official-content, .community-grid, .music-grid { grid-template-columns: 1fr; flex-direction: column; gap: 30px; }
+            .about-ps { flex-direction: column !important; }
             .about-image, .card-image, .hero-image { width: 100%; height: auto; }
             .header-content { flex-direction: column; gap: 20px; }
             .hero-text h1 { font-size: 3rem; }
+            .showcase-card { flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+            .watch-info { align-self: center; }
+            .square-placeholder { width: 100%; height: auto; aspect-ratio: 1/1; }
         }
     </style>
 </head>
@@ -175,7 +218,7 @@
         <section class="hero">
             <div class="hero-text">
                 <h1>ENTER THE <span>PERTHSANTA UNIVERSE</span></h1>
-                <p>A mesmerizing realm of stories, music, and deeply emotional character arcs created by fans and beyond.</p>
+                <p>Everything about PerthSanta is here.</p>
                 <a href="#community" class="btn">ENTER THE UNIVERSE &rarr;</a>
             </div>
             <img src="enter-universe.JPG" alt="Enter the Universe" class="content-image hero-image">
@@ -183,45 +226,248 @@
 
         <!-- 2. Who is PerthSanta Section -->
         <section id="about" class="about-ps">
-            <img src="about-perthsanta.JPG" alt="Who is PerthSanta" class="content-image about-image">
-            <div class="about-text">
-                <h2>WHO IS PERTHSANTA?</h2>
-                <p>Perth Tanapon and Santa Pongsapak are phenomenal Thai actors known for their undeniable on-screen chemistry, emotional depth, and captivating performances. Their dynamic presence has inspired a massive global following.</p>
-                <p>This universe is a dedicated gateway bridging their official projects—from intense drama series to mesmerizing soundtracks—with the brilliant, fan-driven storytelling that keeps their world alive.</p>
-                <a href="#" class="btn-outline">LEARN MORE &rarr;</a>
+            <div style="display: flex; gap: 40px; align-items: center; width: 100%; flex-wrap: wrap;">
+                <img src="about-perthsanta.JPG" alt="Who is PerthSanta" class="content-image" style="width: 320px; height: 320px; flex-shrink: 0; border-radius: 8px;">
+                <div class="about-text" style="flex: 1; min-width: 300px;">
+                    <h2 style="color: var(--text-main); margin-bottom: 20px; font-size: 2.5rem; letter-spacing: 2px;">WHO IS PERTHSANTA?</h2>
+                    <p style="font-size: 1.15rem; color: var(--text-main); font-weight: bold; margin-bottom: 15px;">
+                        Two distinct paths, one powerful universe. Perth Tanapon and Santa Pongsapak form one of the most dynamic and fiercely talented duos in the Thai entertainment industry.
+                    </p>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;">
+                        Individually, they have proven themselves as versatile artists. Together, their magnetic on-screen chemistry and shared passion for storytelling have created an unstoppable force under GMMTV.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Detaylı Bilgi Kartları -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; width: 100%; margin-top: 20px;">
+                
+                <!-- Perth Tanapon -->
+                <div style="background: rgba(20,0,5,0.4); padding: 30px; border-left: 3px solid var(--accent-red); border-radius: 0 8px 8px 0;">
+                    <h3 style="color: var(--text-main); margin-bottom: 15px; font-size: 1.4rem; letter-spacing: 1px;">PERTH TANAPON</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px;">
+                        Stepping into the spotlight around 2017, Perth quickly rose to international fame with his breakout role in <em>Love by Chance</em>. Known for his ability to convey deep, complex emotions, he is a multi-talented artist. Beyond acting in hit series like <em>Dangerous Romance</em> and <em>Double Savage</em>, Perth is also a gifted musician, singer, and guitarist, bringing a raw, grounded energy to everything he does.
+                    </p>
+                </div>
+
+                <!-- Santa Pongsapak -->
+                <div style="background: rgba(20,0,5,0.4); padding: 30px; border-left: 3px solid var(--accent-red); border-radius: 0 8px 8px 0;">
+                    <h3 style="color: var(--text-main); margin-bottom: 15px; font-size: 1.4rem; letter-spacing: 1px;">SANTA PONGSAPAK</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px;">
+                        Santa burst onto the scene capturing hearts with his phenomenal dance skills and highly expressive acting. Gaining massive recognition for his role in <em>My Only 12%</em>, he quickly proved his versatility. Santa brings a vibrant, captivating, and emotionally rich presence to the screen. His natural charisma perfectly balances the intense narratives he takes part in.
+                    </p>
+                </div>
+
+                <!-- THE DUO, PROJECTS & SOCIAL MEDIA -->
+                <div style="grid-column: 1 / -1; background: linear-gradient(90deg, rgba(20,0,5,0.8), rgba(138,0,28,0.2)); padding: 40px 30px; border-top: 1px solid var(--accent-red); border-bottom: 1px solid var(--accent-red); border-radius: 8px; margin-top: 10px;">
+                    <h3 style="color: var(--accent-red); margin-bottom: 15px; font-size: 1.5rem; letter-spacing: 2px; text-align: center;">THE DUO: PERTHSANTA</h3>
+                    
+                    <p style="color: var(--text-main); font-size: 1rem; margin-bottom: 25px; text-align: center; max-width: 850px; margin-left: auto; margin-right: auto; line-height: 1.7;">
+                        When Perth and Santa share the screen, their combined energy creates an unforgettable experience. As a beloved GMMTV duo, their partnership goes beyond acting—it's a synergy built on mutual respect, shared creative vision, and a deep connection with their global fanbase.
+                    </p>
+
+                    <!-- Ortak Projeler ve Gelecek Diziler -->
+                    <div style="background: rgba(0,0,0,0.5); border-left: 3px solid var(--accent-red); padding: 20px 25px; max-width: 850px; margin: 0 auto 35px auto; border-radius: 0 8px 8px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+                        <h4 style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase;">Joint Series & Upcoming Projects</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                            Their on-screen partnership officially took the BL world by storm with their dynamic roles in the hit GMMTV series <strong>Perfect 10 Liners</strong>. The excitement only continues to grow as the universe expands with their highly anticipated upcoming project, <strong>Love You Teacher</strong>, where they are set to deliver even more intense, thrilling, and character-driven performances.
+                        </p>
+                    </div>
+                    
+                    <!-- Sosyal Medya Linkleri -->
+                    <div style="display: flex; justify-content: center; gap: 50px; flex-wrap: wrap;">
+                        <div style="text-align: center;">
+                            <span style="display: block; color: var(--text-muted); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 12px; font-weight: bold;">FOLLOW PERTH</span>
+                            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                                <a href="https://www.instagram.com/perthppe" target="_blank" class="btn-outline" style="padding: 8px 18px; font-size: 0.8rem;">IG: @perthppe</a>
+                                <a href="https://twitter.com/perthppe" target="_blank" class="btn-outline" style="padding: 8px 18px; font-size: 0.8rem;">X: @perthppe</a>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <span style="display: block; color: var(--text-muted); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 12px; font-weight: bold;">FOLLOW SANTA</span>
+                            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                                <a href="https://www.instagram.com/santa.pp" target="_blank" class="btn-outline" style="padding: 8px 18px; font-size: 0.8rem;">IG: @santa.pp</a>
+                                <a href="https://twitter.com/PongsapakSanta" target="_blank" class="btn-outline" style="padding: 8px 18px; font-size: 0.8rem;">X: @PongsapakSanta</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- 3. Official Content Section -->
-        <section id="series" class="official-content">
+        <!-- 3. Official Content Cards (Vitrin) -->
+        <section id="official" class="official-content">
             <!-- Series Card -->
-            <div class="card">
+            <div class="card" id="series">
                 <div class="card-text">
                     <div>
                         <div class="card-icon">🎬</div>
                         <h2>SERIES</h2>
-                        <p>Dive deep into gripping narratives like the "Love You Teacher" universe. Explore complex character dynamics, uncover the hidden motives behind the Director and the Math Teacher, and track every thrilling storyline.</p>
+                        <p>Dive deep into gripping narratives. Explore complex character dynamics, and track every thrilling storyline from Perfect 10 Liners to Love You Teacher.</p>
                     </div>
-                    <a href="#" class="btn">VIEW SERIES &rarr;</a>
+                    <a href="#series-detailed" class="btn">VIEW SERIES &rarr;</a>
                 </div>
                 <img src="series-loveyouteacher.JPG" alt="Series" class="content-image card-image">
             </div>
 
             <!-- Music Card -->
-            <div class="card">
+            <div class="card" id="music">
                 <div class="card-text">
                     <div>
                         <div class="card-icon">🎵</div>
                         <h2>MUSIC</h2>
-                        <p>Immerse yourself in the official soundtracks and ambient audio that define the atmosphere. These melodies perfectly capture the tension, romance, and emotional weight of the universe.</p>
+                        <p>Immerse yourself in the official soundtracks, solo tracks, and ambient audio that perfectly capture the tension and romance of the universe.</p>
                     </div>
-                    <a href="#" class="btn">LISTEN NOW &rarr;</a>
+                    <a href="#music-detailed" class="btn">LISTEN NOW &rarr;</a>
                 </div>
                 <img src="music-soundtrack.JPG" alt="Music" class="content-image card-image">
             </div>
         </section>
 
-        <!-- 4. Community Section -->
+        <!-- 4. DETAILED SERIES SHOWCASE -->
+        <section id="series-detailed" class="series-showcase">
+            <div class="series-showcase-header">
+                <h2>EXPLORE THE SERIES</h2>
+                <p>Dive into the storylines defining the universe</p>
+            </div>
+
+            <div class="showcase-grid">
+                
+                <!-- Perfect 10 Liners -->
+                <div class="showcase-card">
+                    <!-- Kare Görsel -->
+                    <div class="square-placeholder">
+                        Image 250x250
+                    </div>
+                    
+                    <div class="showcase-info">
+                        <h3>PERFECT 10 LINERS</h3>
+                        <p>
+                            <strong>Synopsis:</strong> The series follows six university students, three couples, with each couple having a separate arc in the series. The first arc is led by Arm (Kasidet Plookphol) and Arc (Jiratchapong Srisang), the second arc is led by Yotha (Tanapon Sukumpantanasan) and Gun (Pongsapak Udompoch), and the third and final arc is led by Faifa (Panachai Sriariyarungruang) and Wine (Jiruntanin Trairattanayon). Set in the engineering faculty, the story takes center stage specifically between episodes 9 and 16 for Yotha and Gun, highlighting their university life and the special, protective bond they form within the "Perfect 10" lineage.
+                        </p>
+                        <div class="watch-info">
+                            <span class="watch-icon">▶</span>
+                            <span>Where to watch: Official GMMTV YouTube Channel & Viu</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Love You Teacher -->
+                <div class="showcase-card">
+                    <!-- Kare Görsel -->
+                    <div class="square-placeholder">
+                        Image 250x250
+                    </div>
+                    
+                    <div class="showcase-info">
+                        <h3>LOVE YOU TEACHER</h3>
+                        <p>
+                            <strong>Synopsis:</strong> Pobmek (Tanapon Sukumpantanasan) is a teacher who dislikes children but devotes his affection to his partner Solar (Pongsapak Udompoch), who is also a teacher. After a serious accident, Solar suffers neurological damage and begins to behave like a seven-year-old child. Pobmek's life changes dramatically as he must balance being a loving partner and a caregiver, facing the emotional and professional challenges of sustaining their relationship under difficult circumstances.
+                        </p>
+                        <div class="watch-info">
+                            <span class="watch-icon">▶</span>
+                            <span>Where to watch: Coming Soon on GMMTV</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. DETAILED MUSIC SHOWCASE -->
+        <section id="music-detailed" class="music-showcase">
+            <div class="series-showcase-header">
+                <h2>PERTHSANTA & THEIR MUSIC</h2>
+                <p>Discover the soundtracks, solo projects, and duo collaborations</p>
+            </div>
+
+            <div class="music-grid">
+                
+                <!-- 1. Perth Solo Music -->
+                <div class="music-card">
+                    <div class="music-icon">🎸</div>
+                    <h3>PERTH SOLO MUSIC</h3>
+                    <p>Explore Perth Tanapon's individual musical journey. Known for his raw vocals and impressive guitar skills, his solo tracks reflect a deeply personal side of his artistry and passion for music.</p>
+                    
+                    <div class="song-list">
+                        <a href="https://youtu.be/fyx7IXtr6VE?si=q8wHJ9AdjxpCnPyU" target="_blank" class="yt-link">
+                            <span>▶</span> Secret
+                        </a>
+                        <a href="https://youtu.be/2O1uI8Inb5Q?si=FGZPxhvAni4me5_F" target="_blank" class="yt-link">
+                            <span>▶</span> Numb
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Santa (Jasper) Music -->
+                <div class="music-card">
+                    <div class="music-icon">🎧</div>
+                    <h3>SANTA (JASPER) MUSIC</h3>
+                    <p>Discover the rhythmic and highly energetic tracks by Santa under his Jasper persona. His music perfectly combines captivating beats with his signature dynamic and expressive flair.</p>
+                    
+                    <div class="song-list">
+                        <a href="https://youtu.be/YpVjU4OJ4Ms?si=kZEMp0rSEg7C3cWT" target="_blank" class="yt-link">
+                            <span>▶</span> Sadistic
+                        </a>
+                        <a href="https://youtu.be/KO78TDSp_bo?si=vm8Utcn4nJzbSvwv" target="_blank" class="yt-link">
+                            <span>▶</span> Take It Off
+                        </a>
+                        <a href="https://youtu.be/qLb9ZfWBxIw?si=1TwoA-zGPMJb7zp6" target="_blank" class="yt-link">
+                            <span>▶</span> Touch
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. Duo OST (Tam Genişlikte Özel Kart) -->
+                <div class="music-card duo-card">
+                    <div class="music-icon" style="text-align: center; font-size: 3rem;">🎤🎤</div>
+                    <h3 style="text-align: center; font-size: 1.8rem;">DUO COLLABORATIONS & OST</h3>
+                    <p style="text-align: center; max-width: 800px; margin: 0 auto 25px auto;">The ultimate musical collaboration. Experience the official tracks where Perth and Santa join forces, blending their unique voices to perfectly capture the essence of their chemistry.</p>
+                    
+                    <div class="song-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <a href="https://youtu.be/itsxy1gUIYY?si=uBsh_1S01Ph9Nmn2" target="_blank" class="yt-link">
+                            <span>▶</span> No One Else
+                        </a>
+                        <a href="https://youtu.be/trvsug_27vc?si=Jq-SQiY351NmEXoQ" target="_blank" class="yt-link">
+                            <span>▶</span> Be With Me
+                        </a>
+                        <a href="https://youtu.be/-OwlECihP68?si=_bfRdMLWHBhSMk_A" target="_blank" class="yt-link">
+                            <span>▶</span> Arak Arak
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 4. Perth OST -->
+                <div class="music-card">
+                    <div class="music-icon">🎬</div>
+                    <h3>PERTH OST</h3>
+                    <p>Relive the emotional highs of Perth's acting career through his original soundtracks. Featuring iconic and heartfelt songs from his hit series.</p>
+                    
+                    <div class="song-list">
+                        <a href="https://youtu.be/PE1RN0rkau4?si=odDMqIT27RVxnB0q" target="_blank" class="yt-link">
+                            <span>▶</span> Written In Our Hearts
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 5. Santa OST -->
+                <div class="music-card">
+                    <div class="music-icon">🎬</div>
+                    <h3>SANTA OST</h3>
+                    <p>Listen to the touching melodies from Santa's individual acting projects, featuring his heartwarming and emotionally rich vocal performances.</p>
+                    
+                    <div class="song-list">
+                        <a href="https://youtu.be/8e15jzG0Pao?si=1IBGnwgs2J7h0zr3" target="_blank" class="yt-link">
+                            <span>▶</span> My Sky
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. Community Section -->
         <section id="community" class="community-area">
             <div class="section-header">
                 <h2>JOIN THE COMMUNITY</h2>
@@ -259,14 +505,13 @@
             </div>
         </section>
 
-        <!-- 5. Latest Updates Section (Dinamik Alan / Bekleme Ekranı) -->
+        <!-- 7. Latest Updates Section -->
         <section class="latest-updates">
             <div class="latest-header">
                 <h2>LATEST COMMUNITY UPDATES</h2>
             </div>
             
             <div id="updates-container">
-                <!-- Firebase bağlandığında paylaşımlar buraya düşecek. Şimdilik bekleme ekranı: -->
                 <div class="empty-state">
                     <div class="comm-icon" style="margin: 0 auto 15px auto; width: 50px; height: 50px; border: none; font-size: 2rem;">⏳</div>
                     <p>Awaiting community uploads...</p>
