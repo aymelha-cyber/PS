@@ -96,7 +96,6 @@
         nav a:hover:not(.no-line)::after { width: 100%; }
         nav a:hover { color: #fff; }
         
-        /* Dinamik Giriş/Çıkış Butonu Stilleri */
         .signup-link { background: var(--accent-red); color: white !important; padding: 8px 18px; border-radius: 6px; border-top: 1px solid rgba(255,255,255,0.5); box-shadow: 0 0 10px rgba(255,0,51,0.3); }
         .signup-link:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(255,0,51,0.6); }
         
@@ -188,7 +187,7 @@
         .full-width-card { grid-column: 1 / -1; }
         .ost-split { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
 
-        /* 6. Community Section */
+        /* 6. Community Section & FEED */
         .community-area { padding: 60px 50px; margin-bottom: 100px; }
         .community-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 40px; }
         .community-card { padding: 40px 25px; text-align: center; display: flex; flex-direction: column; align-items: center; background: rgba(10,0,5,0.5); }
@@ -196,6 +195,16 @@
         .comm-icon { width: 70px; height: 70px; background: rgba(255,255,255,0.05); color: white; font-size: 2.5rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .community-card h3 { color: var(--text-main); margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px; }
         .community-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; flex-grow: 1; line-height: 1.6; }
+        
+        /* Dinamik Feed (Akış) Kartları */
+        .feed-container { display: flex; flex-direction: column; gap: 20px; margin-top: 30px; }
+        .feed-card { padding: 25px 30px; display: flex; flex-direction: column; gap: 12px; background: rgba(10,0,5,0.6); }
+        .feed-card:hover { border-color: rgba(255,255,255,0.3); background: rgba(20,0,10,0.8); }
+        .feed-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .feed-category { background: var(--accent-red); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .feed-author { color: var(--text-muted); font-size: 0.85rem; font-weight: bold; }
+        .feed-title { color: white; font-size: 1.4rem; letter-spacing: 1px; font-family: var(--font-serif); margin-top: 5px; }
+        .feed-desc { color: #c4c4c4; font-size: 0.95rem; line-height: 1.6; }
 
         /* Footer & Modals */
         footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 40px 0; display: flex; justify-content: space-between; align-items: center; background: #020000; }
@@ -253,7 +262,7 @@
                         <li id="userPanelLi" class="user-panel">
                             <button id="newPostBtn" class="btn" style="padding: 8px 16px; font-size: 0.75rem; box-shadow: none;">+ NEW POST</button>
                             <span id="userEmailDisplay" class="user-email"></span>
-                            <a id="logoutBtn" class="logout-link no-line">Logout</a>
+                            <a id="logoutBtn" class="logout-link no-line">LOGOUT</a>
                         </li>
                     </ul>
                 </nav>
@@ -354,7 +363,6 @@
 
         <!-- 3. Official Content Cards -->
         <section id="official" class="official-content">
-            <!-- Series Card -->
             <div class="card glass-card">
                 <div class="card-icon">🎬</div>
                 <h2>SERIES</h2>
@@ -362,7 +370,6 @@
                 <button onclick="toggleSection('series-detailed')" class="btn" style="margin-top: auto;">VIEW SERIES &rarr;</button>
             </div>
 
-            <!-- Music Card -->
             <div class="card glass-card">
                 <div class="card-icon">🎵</div>
                 <h2>MUSIC</h2>
@@ -379,7 +386,6 @@
             </div>
 
             <div class="showcase-grid">
-                <!-- Perfect 10 Liners -->
                 <div class="showcase-card glass-card">
                     <div class="square-placeholder">
                         <img src="p10l-square.jfif" alt="Perfect 10 Liners">
@@ -393,7 +399,6 @@
                     </div>
                 </div>
 
-                <!-- Love You Teacher -->
                 <div class="showcase-card glass-card">
                     <div class="square-placeholder">
                         <img src="lyt-square.jfif" alt="Love You Teacher">
@@ -407,7 +412,6 @@
                     </div>
                 </div>
 
-                <!-- The Spooky Love Tale -->
                 <div class="showcase-card glass-card">
                     <div class="square-placeholder">
                         <img src="slt-square.jfif" alt="The Spooky Love Tale">
@@ -432,7 +436,6 @@
             </div>
 
             <div class="music-grid">
-                <!-- Duo OST -->
                 <div class="music-card full-width-card duo-card glass-card">
                     <div class="music-icon" style="text-align: center; font-size: 3rem;">🎤🎤</div>
                     <h3 style="text-align: center; font-size: 1.8rem;">DUO COLLABORATIONS & OST</h3>
@@ -445,7 +448,6 @@
                     </div>
                 </div>
 
-                <!-- Perth Solo -->
                 <div class="music-card glass-card">
                     <div class="music-icon">🎸</div>
                     <h3>PERTH SOLO</h3>
@@ -456,7 +458,6 @@
                     </div>
                 </div>
 
-                <!-- Santa (Jasper Group) -->
                 <div class="music-card glass-card">
                     <div class="music-icon">🎧</div>
                     <h3>JASPER (T-POP GROUP)</h3>
@@ -468,7 +469,6 @@
                     </div>
                 </div>
 
-                <!-- Bireysel OST'ler -->
                 <div class="music-card full-width-card glass-card">
                     <div class="music-icon" style="text-align: center;">🎬</div>
                     <h3 style="text-align: center;">INDIVIDUAL OSTs</h3>
@@ -495,13 +495,14 @@
                 <p>CONNECT, CREATE, AND SHARE WITH OTHER FANS</p>
             </div>
 
+            <!-- Vitrin Kartları -->
             <div class="community-grid">
                 <div class="community-card glass-card">
                     <div class="comm-icon">📝</div>
                     <h3>FAN FICTION</h3>
                     <p>Share your story links (AO3, Wattpad) and explore emotional character arcs written by fellow fans.</p>
                     <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
-                        <button class="btn-outline" style="width: 100%;">SHARE A STORY</button>
+                        <button class="btn-outline" style="width: 100%;" onclick="document.getElementById('newPostBtn').click()">SHARE A STORY</button>
                         <button onclick="randomFic()" class="btn" style="width: 100%; font-size: 0.8rem; background: #fff; color: #000; box-shadow: none;">🎲 RANDOM FIC</button>
                     </div>
                 </div>
@@ -510,20 +511,31 @@
                     <div class="comm-icon">🎮</div>
                     <h3>FAN GAMES</h3>
                     <p>Upload or link your interactive web-based fan games, escape rooms, and coding projects.</p>
-                    <button class="btn-outline" style="width: 100%; margin-top: auto;">SHARE A GAME</button>
+                    <button class="btn-outline" style="width: 100%; margin-top: auto;" onclick="document.getElementById('newPostBtn').click()">SHARE A GAME</button>
                 </div>
 
                 <div class="community-card glass-card">
                     <div class="comm-icon">💬</div>
                     <h3>DISCUSSIONS</h3>
                     <p>Talk about episode theories, character analysis, and connect with the global fanbase.</p>
-                    <button class="btn-outline" style="width: 100%; margin-top: auto;">START TALKING</button>
+                    <button class="btn-outline" style="width: 100%; margin-top: auto;" onclick="document.getElementById('newPostBtn').click()">START TALKING</button>
                 </div>
             </div>
             
             <div id="joinCommunityPrompt" style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
                 <p style="margin-bottom: 15px; color: var(--text-muted);">Ready to share your own creations?</p>
                 <button id="bottomSignupBtn" class="btn" style="padding: 16px 50px; font-size: 1.1rem;">JOIN & SIGN UP &rarr;</button>
+            </div>
+
+            <!-- CANLI POST AKIŞI (FEED) BÖLÜMÜ -->
+            <div style="margin-top: 80px; padding-top: 40px; border-top: 2px dashed rgba(255,0,51,0.3);">
+                <h2 style="font-family: var(--font-serif); font-size: 2rem; color: white; margin-bottom: 10px; text-align: center;">LATEST FROM THE COMMUNITY</h2>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px;">Discover the newest creations and discussions from fans around the universe.</p>
+                
+                <div id="communityFeed" class="feed-container">
+                    <!-- Postlar buraya otomatik olarak düşecek -->
+                    <p style="text-align:center; color: var(--text-muted);">Loading universe data...</p>
+                </div>
             </div>
         </section>
 
@@ -623,11 +635,11 @@
         </div>
     </div>
 
-    <!-- FİREBASE SİSTEMİ (HEM AUTH HEM DATABASE İÇERİR) -->
+    <!-- FİREBASE SİSTEMİ (AUTH + DATABASE + REAL-TIME FEED) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
         // Firebase Ayarları
         const firebaseConfig = {
@@ -639,12 +651,11 @@
           appId: "1:721217348915:web:ccc69dc06c313acae34a46"
         };
 
-        // Servisleri Başlat
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // -- MODAL KONTROLLERİ (Yeni Güvenli Yöntem) --
+        // -- MODAL KONTROLLERİ --
         const authModal = document.getElementById('authModal');
         const postModal = document.getElementById('postModal');
         
@@ -660,7 +671,6 @@
             authModal.style.display = 'block';
         }
 
-        // Tıklama Olayları Bağlama
         document.getElementById('topLoginBtn').addEventListener('click', () => openAuth('login'));
         document.getElementById('bottomSignupBtn').addEventListener('click', () => openAuth('signup'));
         document.getElementById('closeAuthBtn').addEventListener('click', () => authModal.style.display = 'none');
@@ -688,7 +698,7 @@
             if (currentAuthMode === 'signup') {
                 createUserWithEmailAndPassword(auth, email, password)
                     .then(() => { authModal.style.display = 'none'; authForm.reset(); })
-                    .catch((error) => { errorDiv.innerText = error.message; submitBtn.disabled = false; submitBtn.innerText = "SIGN UP"; });
+                    .catch((error) => { errorDiv.innerText = "Error: " + error.message; submitBtn.disabled = false; submitBtn.innerText = "SIGN UP"; });
             } else {
                 signInWithEmailAndPassword(auth, email, password)
                     .then(() => { authModal.style.display = 'none'; authForm.reset(); })
@@ -696,7 +706,6 @@
             }
         });
 
-        // Kullanıcı Durumu Dinleyici
         onAuthStateChanged(auth, (user) => {
             submitBtn.disabled = false;
             submitBtn.innerText = currentAuthMode === 'signup' ? 'SIGN UP' : 'LOG IN';
@@ -714,12 +723,11 @@
             }
         });
 
-        // Çıkış Yapma
         document.getElementById('logoutBtn').addEventListener('click', () => {
             signOut(auth).then(() => alert("Logged out successfully."));
         });
 
-        // -- 2. VERİTABANINA YAZI GÖNDERME (FIRESTORE) --
+        // -- 2. YENİ POST GÖNDERME --
         const postForm = document.getElementById('postForm');
         const postSubmitBtn = document.getElementById('postSubmitBtn');
         const postMessage = document.getElementById('postMessage');
@@ -731,17 +739,17 @@
             postMessage.innerText = "";
 
             try {
-                // Kullanıcının postunu Firestore'daki "posts" koleksiyonuna ekliyoruz!
                 await addDoc(collection(db, "posts"), {
                     category: document.getElementById('postCategory').value,
                     title: document.getElementById('postTitle').value,
                     description: document.getElementById('postDesc').value,
                     link: document.getElementById('postLink').value,
-                    author: auth.currentUser.email.split('@')[0], // Yazarın adını otomatik alır
-                    createdAt: serverTimestamp() // Sunucu saatini basar
+                    author: auth.currentUser.email.split('@')[0],
+                    createdAt: serverTimestamp() 
                 });
 
-                postMessage.innerText = "Harika! Postun başarıyla evrene gönderildi.";
+                postMessage.style.color = "#4caf50";
+                postMessage.innerText = "Awesome! Your post has been successfully added to the universe.";
                 postForm.reset();
                 
                 setTimeout(() => {
@@ -753,16 +761,55 @@
 
             } catch (error) {
                 console.error("Error writing document: ", error);
-                postMessage.style.color = "red";
-                postMessage.innerText = "Bir hata oluştu. Veritabanı iznini açtığından emin ol.";
+                postMessage.style.color = "var(--accent-red)";
+                postMessage.innerText = "An error occurred. Please make sure database permissions are enabled.";
                 postSubmitBtn.disabled = false;
                 postSubmitBtn.innerText = "SHARE WITH COMMUNITY";
             }
         });
 
+        // -- 3. CANLI POST AKIŞI (REAL-TIME FEED) --
+        const feedContainer = document.getElementById('communityFeed');
+        const q = query(collection(db, "posts"), orderBy("createdAt", "desc")); // En yeniler en üstte
+
+        onSnapshot(q, (snapshot) => {
+            feedContainer.innerHTML = ''; // Önce ekranı temizle
+            
+            if (snapshot.empty) {
+                feedContainer.innerHTML = '<p style="text-align:center; color: var(--text-muted); font-style: italic;">No posts yet. Be the first to share a creation!</p>';
+                return;
+            }
+
+            snapshot.forEach((doc) => {
+                const post = doc.data();
+                
+                // Güvenlik ve Null Check (Eğer veritabanı yavaşsa veya yeni atılmışsa)
+                if(!post.title) return;
+
+                // Kategoriye Göre Renk Ayarlama
+                let badgeColor = "var(--accent-red)";
+                if (post.category === "Fan Game") badgeColor = "#0066cc";
+                if (post.category === "Discussion") badgeColor = "#ff9900";
+
+                const html = `
+                    <div class="feed-card glass-card">
+                        <div class="feed-header">
+                            <span class="feed-category" style="background: ${badgeColor};">${post.category}</span>
+                            <span class="feed-author">by @${post.author}</span>
+                        </div>
+                        <h3 class="feed-title">${post.title}</h3>
+                        <p class="feed-desc">${post.description}</p>
+                        <a href="${post.link}" target="_blank" class="btn-outline" style="align-self: flex-start; padding: 10px 20px; font-size: 0.8rem; margin-top: 15px;">OPEN LINK &rarr;</a>
+                    </div>
+                `;
+                
+                feedContainer.innerHTML += html; // Karta Ekle
+            });
+        });
+
     </script>
 
-    <!-- UI Fonksiyonları (Animasyonlar ve Menüler) -->
+    <!-- Normal (Eski) JavaScript Fonksiyonları -->
     <script>
         function toggleSection(id) {
             const section = document.getElementById(id);
@@ -784,7 +831,7 @@
         }
 
         function randomFic() {
-            alert("Rastgele hikaye özelliği yapım aşamasında! Veritabanındaki hikayeler ekrana geldiğinde buradan direkt olarak açılacak.");
+            alert("Random story feature is under construction! Once stories load from the database, this will open them directly.");
         }
     </script>
 </body>
