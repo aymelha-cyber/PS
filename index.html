@@ -39,7 +39,6 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* Smooth & 3D Glass Cards */
         .glass-card {
             background: var(--glass-bg);
             border-radius: 16px;
@@ -62,7 +61,6 @@
 
         .logo-img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-red); box-shadow: 0 0 10px rgba(255,0,51,0.5); }
 
-        /* Buttons */
         .btn {
             display: inline-flex; justify-content: center; align-items: center; gap: 10px;
             background: linear-gradient(45deg, var(--dark-red), var(--accent-red));
@@ -84,7 +82,6 @@
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .btn-outline:hover { background: white; color: var(--bg-color); border-color: white; }
 
-        /* Header */
         header { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; margin-bottom: 40px; background: rgba(3, 0, 0, 0.85); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(15px); }
         .header-content { display: flex; justify-content: space-between; align-items: center; }
         .logo-area { display: flex; align-items: center; gap: 15px; }
@@ -177,13 +174,14 @@
         .community-card h3 { color: var(--text-main); margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px; }
         .community-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; flex-grow: 1; line-height: 1.6; }
         
-        /* Dinamik Akış Kartları */
+        /* Dinamik Akış Kartları (Ana Sayfa) */
         .feed-container { display: flex; flex-direction: column; gap: 20px; margin-top: 30px; }
         .feed-card { padding: 25px 30px; display: flex; flex-direction: column; gap: 12px; background: rgba(10,0,5,0.6); }
         .feed-card:hover { border-color: rgba(255,255,255,0.3); background: rgba(20,0,10,0.8); }
         .feed-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
         .feed-category { background: var(--accent-red); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
         
+        /* Vibe Badge Stili */
         .vibe-badge { background: rgba(255,255,255,0.1); color: #e0e0e0; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; border: 1px solid rgba(255,255,255,0.2); }
         
         .feed-author { color: var(--text-muted); font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 5px; }
@@ -588,7 +586,7 @@
         </div>
     </div>
 
-    <!-- ✏️ POST DÜZENLEME EKRANI (YENİ EKLENDİ) -->
+    <!-- POST DÜZENLEME EKRANI -->
     <div id="editPostModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('editPostModal')">&times;</span>
@@ -651,7 +649,7 @@
         </div>
     </div>
 
-    <!-- FİREBASE & SAYFA DEĞİŞTİRME SİSTEMİ -->
+    <!-- FİREBASE SİSTEMİ -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
@@ -670,6 +668,12 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        // GLOBAL DEĞİŞKENLER
+        window.currentArchiveCategory = "Fan Fiction";
+        window.allCommunityPosts = [];
+        window.currentAuthMode = 'login';
+        window.currentEditPostId = null;
+
         // -- YENİ NESİL SAYFA DEĞİŞTİRİCİ (SPA) --
         const homePageView = document.getElementById('homePageView');
         const archivePageView = document.getElementById('archivePageView');
@@ -685,6 +689,8 @@
         }
 
         window.openArchivePage = function(categoryName) {
+            window.currentArchiveCategory = categoryName; // Hatanın çözümü için CSS'ten bağımsız değişken
+            
             const titleEl = document.getElementById('archiveTitle');
             const subEl = document.getElementById('archiveSubtitle');
             const addBtnEl = document.getElementById('archiveAddBtn');
@@ -711,7 +717,7 @@
             archivePageView.style.display = 'block';
             window.scrollTo(0, 0);
 
-            renderFeeds();
+            window.renderFeeds();
         }
 
         window.sharePost = function(link) {
@@ -722,9 +728,7 @@
             });
         }
 
-        // -- YENİ: POST SİLME VE DÜZENLEME MANTIĞI --
-        
-        // Silme İşlemi
+        // -- POST SİLME VE DÜZENLEME --
         window.deletePost = async function(postId) {
             if(confirm("Are you sure you want to delete this post? This action cannot be undone.")) {
                 try {
@@ -735,8 +739,6 @@
             }
         }
 
-        // Düzenleme (Edit) Ekranını Açma
-        window.currentEditPostId = null;
         window.openEditPost = function(postId) {
             const post = window.allCommunityPosts.find(p => p.id === postId);
             if(!post) return;
@@ -750,7 +752,6 @@
             document.getElementById('editPostModal').style.display = 'block';
         }
 
-        // Düzenleme Formunu Gönderme
         document.getElementById('editPostForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const submitBtn = document.getElementById('editPostSubmitBtn');
@@ -782,16 +783,21 @@
             }
         });
 
-
         // -- POST KARTINI OLUŞTURAN ORTAK FONKSİYON --
         function createPostHTML(post) {
             let badgeColor = "var(--accent-red)";
             if (post.category === "Fan Game") badgeColor = "#0066cc";
             if (post.category === "Discussion") badgeColor = "#ff9900";
 
+            // Tarihi Formatlama
+            let dateStr = "Just now";
+            if(post.createdAt && typeof post.createdAt.toDate === 'function') {
+                const d = post.createdAt.toDate();
+                dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            }
+
             let controlsHTML = '';
-            
-            // Eğer giriş yapılmışsa ve postu atan kişi giriş yapan kişiyse (Edit ve Delete çıkar)
+            // Silme ve Düzenleme Butonları (Sadece Gönderen Görür)
             if (auth.currentUser && auth.currentUser.email.split('@')[0] === post.author) {
                 controlsHTML = `
                     <div style="display: flex; gap: 10px;">
@@ -808,7 +814,7 @@
                             <span class="feed-category" style="background: ${badgeColor};">${post.category}</span>
                             <span class="vibe-badge">${post.vibe || 'General 📌'}</span>
                         </div>
-                        <span class="feed-author">by @${post.author}</span>
+                        <span class="feed-author">by @${post.author} • <span style="color: #888; font-weight: normal;">${dateStr}</span></span>
                     </div>
                     <h3 class="feed-title" style="font-size: 1.3rem;">${post.title}</h3>
                     <p class="feed-desc" style="flex-grow: 1;">${post.description}</p>
@@ -823,9 +829,9 @@
             `;
         }
 
-        // Akışları Ortak Güncelleyen Fonksiyon
+        // AKIŞLARI GÜNCELLEYEN MERKEZİ FONKSİYON
         window.renderFeeds = function() {
-            // Ana Sayfa Güncellemesi
+            // Ana Sayfa Güncellemesi (Son 5 Post)
             const homeFeed = document.getElementById('communityFeed');
             homeFeed.innerHTML = ''; 
             
@@ -838,16 +844,13 @@
                 });
             }
 
-            // Arşiv Sayfası Açıksa Orayı da Güncelle
+            // Arşiv Sayfası Açıksa Orayı Güncelle
             if(document.getElementById('archivePageView').style.display === 'block') {
-                const currentTitle = document.getElementById('archiveTitle').innerText;
-                let cat = "Discussion";
-                if(currentTitle.includes('Fic')) cat = "Fan Fiction";
-                else if(currentTitle.includes('Interactive')) cat = "Fan Game";
-                
                 const archiveFeed = document.getElementById('archiveGridContainer');
                 archiveFeed.innerHTML = '';
-                const filteredPosts = window.allCommunityPosts.filter(post => post.category === cat);
+                
+                // CSS'e bağımlı olmayan güvenli filtreleme mantığı
+                const filteredPosts = window.allCommunityPosts.filter(post => post.category === window.currentArchiveCategory);
                 
                 if(filteredPosts.length === 0) {
                     archiveFeed.innerHTML = '<p style="text-align:left; color: var(--text-muted); font-style: italic; grid-column: 1 / -1;">No creations found in this category yet. Be the first!</p>';
@@ -860,9 +863,7 @@
         }
 
 
-        // -- MODAL & AUTH KONTROLLERİ (GLOBAL) --
-        window.currentAuthMode = 'login';
-        
+        // -- MODAL & AUTH KONTROLLERİ --
         window.openAuth = function(mode) {
             window.currentAuthMode = mode;
             document.getElementById('authTitle').innerText = mode === 'signup' ? 'Sign Up' : 'Log In';
@@ -874,20 +875,16 @@
         }
         
         window.openPostPanel = function() {
-            const pageTitle = document.getElementById('archiveTitle').innerText;
             const categorySelect = document.getElementById('postCategory');
-            
+            // Eğer Arşiv sayfasındaysan kategoriyi otomatik seç
             if(document.getElementById('archivePageView').style.display === 'block') {
-                if(pageTitle.includes('Fic')) categorySelect.value = "Fan Fiction";
-                else if(pageTitle.includes('Interactive')) categorySelect.value = "Fan Game";
-                else if(pageTitle.includes('Discussions')) categorySelect.value = "Discussion";
+                categorySelect.value = window.currentArchiveCategory;
             } else {
                 categorySelect.value = "";
             }
             document.getElementById('postModal').style.display = 'block';
         }
 
-        // -- 1. GİRİŞ/KAYIT (AUTH) İŞLEMLERİ --
         const authForm = document.getElementById('authForm');
         const submitBtn = document.getElementById('authSubmitBtn');
         const errorDiv = document.getElementById('authError');
@@ -926,10 +923,8 @@
                 document.getElementById('joinCommunityPrompt').style.display = 'block';
             }
 
-            // Giriş / Çıkış yapıldığında Edit ve Delete butonlarının ekranda güncellenmesi için:
-            if(window.allCommunityPosts && window.allCommunityPosts.length > 0) {
-                renderFeeds();
-            }
+            // Kullanıcı değiştiğinde sil/düzenle butonlarını güncelle
+            if(window.allCommunityPosts.length > 0) window.renderFeeds();
         });
 
         window.logoutUser = function() {
@@ -982,7 +977,6 @@
 
         // -- CANLI POST AKIŞI (OnSnapshot) --
         const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
-        window.allCommunityPosts = [];
 
         onSnapshot(q, (snapshot) => {
             window.allCommunityPosts = [];
@@ -995,8 +989,7 @@
                 window.allCommunityPosts.push(post); 
             });
             
-            // Tüm veriler yüklendikten sonra ekranı çiz
-            renderFeeds();
+            window.renderFeeds();
         });
 
         window.openRandomFic = function() {
