@@ -104,7 +104,7 @@
         .logout-link { color: white; padding: 6px 12px; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; font-size: 0.75rem; transition: all 0.3s; cursor: pointer; }
         .logout-link:hover { background: rgba(255,255,255,0.1); }
 
-        /* DİNAMİK SAYFA DEĞİŞTİRME YAPISI */
+        /* GERÇEK SAYFA GEÇİŞİ İÇİN (SPA) */
         .page-view { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -125,7 +125,6 @@
         .profile-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid rgba(255,255,255,0.8); padding: 4px; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .profile-card:hover .profile-img { border-color: var(--accent-red); }
         .profile-card h3 { color: var(--text-main); font-size: 1.4rem; margin-bottom: 10px; letter-spacing: 1px; }
-        
         .badges-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 15px; }
         .profile-badge { display: inline-block; background: white; color: black; font-size: 0.8rem; padding: 4px 12px; border-radius: 4px; font-weight: bold; letter-spacing: 1px; }
         .profile-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
@@ -191,52 +190,38 @@
         .feed-card:hover { border-color: rgba(255,255,255,0.3); background: rgba(20,0,10,0.8); }
         .feed-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
         .feed-category { background: var(--accent-red); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-        .feed-author { color: var(--text-muted); font-size: 0.85rem; font-weight: bold; }
+        
+        /* YENİ: Vibe Badge Stili */
+        .vibe-badge { background: rgba(255,255,255,0.1); color: #e0e0e0; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; border: 1px solid rgba(255,255,255,0.2); }
+        
+        .feed-author { color: var(--text-muted); font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 5px; }
         .feed-title { color: white; font-size: 1.4rem; letter-spacing: 1px; font-family: var(--font-serif); margin-top: 5px; }
         .feed-desc { color: #c4c4c4; font-size: 0.95rem; line-height: 1.6; }
-
-        /* --------- YENİ: ARŞİV SAYFASI (TAM EKRAN) TASARIMI --------- */
         
-        .archive-header {
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px;
-            margin-bottom: 40px;
-        }
+        /* Etkileşim Butonları (Sadece Share Kaldı) */
+        .interaction-bar { display: flex; gap: 15px; margin-top: 15px; align-items: center; }
+        .share-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+        .share-btn:hover { background: white; color: black; transform: scale(1.05); }
+
+        /* --------- YENİ: ARŞİV SAYFASI TASARIMI --------- */
+        .archive-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; margin-bottom: 40px; }
         .archive-title { font-size: 3rem; color: white; font-family: var(--font-serif); text-transform: uppercase; letter-spacing: 2px; }
         .archive-subtitle { color: var(--text-muted); font-size: 1.1rem; }
 
-        /* Videodaki Şık Kurgu Önerici Banner */
-        .suggest-banner {
-            background: rgba(15,0,5,0.8); border: 1px solid rgba(255,255,255,0.1);
-            border-left: 4px solid #ff6600; border-radius: 12px; padding: 40px; 
-            text-align: center; margin-bottom: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        .suggest-banner { background: rgba(15,0,5,0.8); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid #ff6600; border-radius: 12px; padding: 40px; text-align: center; margin-bottom: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .suggest-banner h3 { color: white; font-size: 1.8rem; margin-bottom: 10px; font-family: var(--font-serif); letter-spacing: 1px; }
         .suggest-banner p { color: var(--text-muted); margin-bottom: 25px; font-size: 1.05rem; }
-        .suggest-btn {
-            background: linear-gradient(45deg, #ff6600, #ff0033); color: white;
-            border: none; padding: 14px 35px; border-radius: 8px; font-weight: bold;
-            font-size: 1.1rem; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
-            text-transform: uppercase; letter-spacing: 1px;
-        }
+        .suggest-btn { background: linear-gradient(45deg, #ff6600, #ff0033); color: white; border: none; padding: 14px 35px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; text-transform: uppercase; letter-spacing: 1px; }
         .suggest-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255,102,0,0.4); }
 
-        /* Arşiv Grid Sistemi (Yan Yana Dev Kartlar) */
-        .archive-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 100px;
-        }
+        .archive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-bottom: 100px; }
 
-        /* Footer & Modals */
         footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 40px 0; display: flex; justify-content: space-between; align-items: center; background: #020000; }
         .footer-links { display: flex; gap: 30px; font-size: 0.9rem; color: var(--text-muted); font-weight: bold; letter-spacing: 1px; }
         .footer-links a:hover { color: white; cursor: pointer; }
 
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
         .modal-content { background-color: #0a0005; margin: 10vh auto; padding: 40px; border: 1px solid rgba(255,255,255,0.2); border-top: 1px solid rgba(255,255,255,0.4); width: 90%; max-width: 500px; border-radius: 12px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); max-height: 80vh; overflow-y: auto; }
-        
         .modal-content::-webkit-scrollbar { width: 8px; }
         .modal-content::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
         .modal-content::-webkit-scrollbar-thumb { background: rgba(255,0,51,0.5); border-radius: 4px; }
@@ -254,14 +239,10 @@
         #postMessage { color: #4caf50; }
 
         @media (max-width: 900px) {
-            .hero, .official-content, .community-grid, .music-grid, .ost-split { grid-template-columns: 1fr; flex-direction: column; gap: 30px; }
+            .hero, .official-content, .community-grid, .music-grid { grid-template-columns: 1fr; flex-direction: column; gap: 30px; }
             .hero-image { height: auto; aspect-ratio: 16/9; }
             .header-content { flex-direction: column; gap: 20px; }
             .hero-text h1 { font-size: 3.2rem; }
-            .showcase-card { flex-direction: column; align-items: center; text-align: center; gap: 20px; }
-            .watch-info { align-self: center; }
-            .hidden-detail-section { padding: 30px 20px; }
-            .square-placeholder { width: 100%; height: auto; aspect-ratio: 1/1; }
             .archive-header { flex-direction: column; text-align: center; gap: 20px; }
             .archive-title { font-size: 2.2rem; }
         }
@@ -269,6 +250,7 @@
 </head>
 <body>
 
+    <!-- ÜST MENÜ (Sabit, Her Sayfada Görünür) -->
     <header>
         <div class="container header-content">
             <div class="logo-area">
@@ -294,7 +276,8 @@
         </div>
     </header>
 
-    <div id="homePageView" class="container page-view">
+    <!-- ==================== ANA SAYFA BÖLÜMÜ ==================== -->
+    <main id="homePageView" class="container page-view">
         
         <section class="hero">
             <div class="hero-text">
@@ -358,10 +341,29 @@
                             Their on-screen partnership officially took the BL world by storm with their dynamic roles in the GMMTV series <strong>Perfect 10 Liners</strong> and the deeply emotional <strong>Love You Teacher</strong>. The excitement only continues to grow as the universe expands with their highly anticipated upcoming project, <strong>The Spooky Love Tale</strong>.
                         </p>
                     </div>
+                    
+                    <div style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
+                        <div style="text-align: center;">
+                            <span style="display: block; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px; font-weight: bold; letter-spacing: 2px;">FOLLOW PERTH</span>
+                            <div style="display: flex; gap: 15px;">
+                                <a href="https://www.instagram.com/perthppe" target="_blank" class="btn-outline">IG: @perthppe</a>
+                                <a href="https://twitter.com/perthppe" target="_blank" class="btn-outline">X: @perthppe</a>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <span style="display: block; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px; font-weight: bold; letter-spacing: 2px;">FOLLOW SANTA</span>
+                            <div style="display: flex; gap: 15px;">
+                                <a href="https://www.instagram.com/santa.pp" target="_blank" class="btn-outline">IG: @santa.pp</a>
+                                <a href="https://twitter.com/Ppsanta" target="_blank" class="btn-outline">X: @Ppsanta</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- 3. Official Content Cards -->
         <section id="official" class="official-content">
             <div class="card glass-card">
                 <div class="card-icon">🎬</div>
@@ -377,6 +379,7 @@
             </div>
         </section>
 
+        <!-- 4. GİZLİ DETAY: SERIES -->
         <section id="series-detailed" class="hidden-detail-section glass-card">
             <div class="detail-header"><h2>PERTHSANTA SERIES</h2></div>
             <div class="showcase-grid">
@@ -410,6 +413,7 @@
             </div>
         </section>
 
+        <!-- 5. GİZLİ DETAY: MUSIC -->
         <section id="music-detailed" class="hidden-detail-section glass-card">
             <div class="detail-header"><h2>PERTHSANTA & THEIR MUSIC</h2></div>
             <div class="music-grid">
@@ -422,9 +426,33 @@
                         <a href="https://youtu.be/-OwlECihP68?si=_bfRdMLWHBhSMk_A" target="_blank" class="yt-link"><span>▶</span> Arak Arak</a>
                     </div>
                 </div>
+
+                <div class="music-card glass-card">
+                    <div class="music-icon">🎸</div>
+                    <h3>PERTH SOLO</h3>
+                    <p>Known for his raw vocals and impressive guitar skills, his solo tracks reflect a deeply personal side of his artistry.</p>
+                    <div class="song-list">
+                        <!-- Şarkılar geri eklendi -->
+                        <a href="https://youtu.be/fyx7IXtr6VE?si=q8wHJ9AdjxpCnPyU" target="_blank" class="yt-link"><span>▶</span> Secret</a>
+                        <a href="https://youtu.be/2O1uI8Inb5Q?si=FGZPxhvAni4me5_F" target="_blank" class="yt-link"><span>▶</span> Numb</a>
+                    </div>
+                </div>
+
+                <div class="music-card glass-card">
+                    <div class="music-icon">🎧</div>
+                    <h3>JASPER (T-POP GROUP)</h3>
+                    <p>Discover the rhythmic and highly energetic tracks by <strong>Jasper</strong>, combining captivating beats with dynamic flair.</p>
+                    <div class="song-list">
+                        <!-- Şarkılar geri eklendi -->
+                        <a href="https://youtu.be/YpVjU4OJ4Ms?si=kZEMp0rSEg7C3cWT" target="_blank" class="yt-link"><span>▶</span> Sadistic</a>
+                        <a href="https://youtu.be/KO78TDSp_bo?si=vm8Utcn4nJzbSvwv" target="_blank" class="yt-link"><span>▶</span> Take It Off</a>
+                        <a href="https://youtu.be/qLb9ZfWBxIw?si=1TwoA-zGPMJb7zp6" target="_blank" class="yt-link"><span>▶</span> Touch</a>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- 6. Community Section -->
         <section id="community" class="community-area glass-card">
             <div class="detail-header" style="margin-bottom: 50px;">
                 <h2>JOIN THE COMMUNITY</h2>
@@ -438,14 +466,12 @@
                     <p>Share your story links and explore emotional character arcs written by fellow fans.</p>
                     <button class="btn" style="width: 100%; margin-top: auto;" onclick="openArchivePage('Fan Fiction')">BROWSE FICS &rarr;</button>
                 </div>
-
                 <div class="community-card glass-card">
                     <div class="comm-icon">🎮</div>
                     <h3>FAN GAMES</h3>
                     <p>Explore interactive web-based fan games, escape rooms, and coding projects.</p>
                     <button class="btn" style="width: 100%; margin-top: auto;" onclick="openArchivePage('Fan Game')">BROWSE GAMES &rarr;</button>
                 </div>
-
                 <div class="community-card glass-card">
                     <div class="comm-icon">💬</div>
                     <h3>DISCUSSIONS</h3>
@@ -456,9 +482,10 @@
             
             <div id="joinCommunityPrompt" style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
                 <p style="margin-bottom: 15px; color: var(--text-muted);">Ready to share your own creations?</p>
-                <button id="bottomSignupBtn" class="btn" style="padding: 16px 50px; font-size: 1.1rem;">JOIN & SIGN UP &rarr;</button>
+                <button onclick="openModal('authModal')" class="btn" style="padding: 16px 50px; font-size: 1.1rem;">JOIN & SIGN UP &rarr;</button>
             </div>
 
+            <!-- CANLI POST AKIŞI (SADECE SON 5 POST) -->
             <div style="margin-top: 80px; padding-top: 40px; border-top: 2px dashed rgba(255,0,51,0.3);">
                 <h2 style="font-family: var(--font-serif); font-size: 2rem; color: white; margin-bottom: 10px; text-align: center;">LATEST UPDATES</h2>
                 <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px;">The newest creations across the universe.</p>
@@ -469,10 +496,14 @@
             </div>
         </section>
 
-    </div> <div id="archivePageView" class="container page-view" style="display: none;">
+    </main> <!-- Ana Sayfa (Container) Sonu -->
+
+
+    <!-- ==================== GERÇEK SAYFA GEÇİŞİ: ARŞİV SAYFASI ==================== -->
+    <main id="archivePageView" class="container page-view" style="display: none; padding-top: 20px;">
         
-        <div style="margin-top: 20px; margin-bottom: 30px;">
-            <a onclick="showHomePage()" class="btn-outline" style="border: none; padding-left: 0;">&larr; BACK TO HOME</a>
+        <div style="margin-bottom: 30px;">
+            <a onclick="showHomePage()" class="btn-outline" style="border: none; padding: 10px 20px; font-weight: bold;">&larr; BACK TO HOME</a>
         </div>
 
         <div class="archive-header">
@@ -481,10 +512,11 @@
                 <p id="archiveSubtitle" class="archive-subtitle">Explore stories written by the community.</p>
             </div>
             <div>
-                <button id="archiveAddBtn" class="btn" style="background: linear-gradient(45deg, #0055ff, #0099ff); font-size: 1.1rem;" onclick="document.getElementById('newPostBtn').click()">+ Add a Fic</button>
+                <button id="archiveAddBtn" class="btn" style="background: linear-gradient(45deg, #0055ff, #0099ff); font-size: 1.1rem; box-shadow: 0 5px 15px rgba(0,102,255,0.4);" onclick="document.getElementById('newPostBtn').click()">+ Add a Fic</button>
             </div>
         </div>
 
+        <!-- Sadece Fan Fiction Kategorisinde Çıkan "Bana Önerme Yap" Banner'ı -->
         <div id="suggestBanner" class="suggest-banner">
             <h3>Not sure what to read today?</h3>
             <p>Let the archive pick a random story for you!</p>
@@ -492,11 +524,13 @@
         </div>
 
         <div id="archiveGridContainer" class="archive-grid">
-            </div>
+            <!-- Kategorinin Tüm Postları Buraya Yan Yana (Grid) Dizilecek -->
+        </div>
 
-    </div>
+    </main>
 
 
+    <!-- ==================== ORTAK ALT KISIM VE MODALLAR ==================== -->
     <div class="container">
         <footer style="margin-top: 50px;">
             <div class="logo-area">
@@ -511,6 +545,7 @@
         </footer>
     </div>
 
+    <!-- Modallar (Auth, Post, vs.) -->
     <div id="authModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeAuthBtn">&times;</span>
@@ -542,6 +577,19 @@
                     <option value="Fan Game">Fan Game</option>
                     <option value="Discussion">Discussion / Theory</option>
                 </select>
+                
+                <!-- YENİ: VIBE / GENRE SEÇİMİ -->
+                <select id="postVibe" class="post-input" required>
+                    <option value="" disabled selected>Select Content Vibe / Genre</option>
+                    <option value="Fluff ☁️">Fluff ☁️</option>
+                    <option value="Angst 💔">Angst 💔</option>
+                    <option value="Alternate Universe 🌌">Alternate Universe 🌌</option>
+                    <option value="Mystery / Thriller 🔍">Mystery / Thriller 🔍</option>
+                    <option value="Spicy 🔥">Spicy 🔥</option>
+                    <option value="Action ⚔️">Action ⚔️</option>
+                    <option value="General 📌">General 📌</option>
+                </select>
+
                 <input type="text" id="postTitle" class="post-input" placeholder="Title of your work" required>
                 <textarea id="postDesc" class="post-input" placeholder="Brief Description..." rows="3" required></textarea>
                 <input type="url" id="postLink" class="post-input" placeholder="Link (e.g., Wattpad, AO3, GitHub)" required>
@@ -550,6 +598,7 @@
         </div>
     </div>
 
+    <!-- Diğer Bilgi Modalları -->
     <div id="aboutModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('aboutModal')">&times;</span>
@@ -580,6 +629,7 @@
         </div>
     </div>
 
+    <!-- FİREBASE & SAYFA DEĞİŞTİRME SİSTEMİ -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
@@ -598,7 +648,7 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // -- YENİ NESİL SAYFA DEĞİŞTİRİCİ (SPA MANTIĞI) --
+        // -- YENİ NESİL SAYFA DEĞİŞTİRİCİ (SPA) --
         const homePageView = document.getElementById('homePageView');
         const archivePageView = document.getElementById('archivePageView');
 
@@ -613,7 +663,6 @@
         }
 
         window.openArchivePage = function(categoryName) {
-            // Arşiv sayfasının başlıklarını güncelle
             const titleEl = document.getElementById('archiveTitle');
             const subEl = document.getElementById('archiveSubtitle');
             const addBtnEl = document.getElementById('archiveAddBtn');
@@ -636,16 +685,48 @@
                 bannerEl.style.display = "none";
             }
 
-            // Sayfaları değiştir (Ana sayfayı gizle, arşivi aç)
             homePageView.style.display = 'none';
             archivePageView.style.display = 'block';
             window.scrollTo(0, 0);
 
-            // Verileri yükle
             renderArchiveFeed(categoryName);
         }
 
-        // -- KATEGORİ VERİLERİNİ EKRANA BASMA (GRID) --
+        // Share (Kopyala) İşlemi
+        window.sharePost = function(link) {
+            navigator.clipboard.writeText(link).then(() => {
+                alert("Link copied! Ready to share with the fandom.");
+            });
+        }
+
+        // -- POST KARTINI OLUŞTURAN ORTAK FONKSİYON --
+        function createPostHTML(post) {
+            let badgeColor = "var(--accent-red)";
+            if (post.category === "Fan Game") badgeColor = "#0066cc";
+            if (post.category === "Discussion") badgeColor = "#ff9900";
+
+            // Etiketler bölümü (Vibe eklendi)
+            return `
+                <div class="feed-card glass-card" style="display: flex; flex-direction: column;">
+                    <div class="feed-header">
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <span class="feed-category" style="background: ${badgeColor};">${post.category}</span>
+                            <span class="vibe-badge">${post.vibe || 'General 📌'}</span>
+                        </div>
+                        <span class="feed-author">by @${post.author}</span>
+                    </div>
+                    <h3 class="feed-title" style="font-size: 1.3rem;">${post.title}</h3>
+                    <p class="feed-desc" style="flex-grow: 1;">${post.description}</p>
+                    
+                    <div class="interaction-bar">
+                        <button class="share-btn" onclick="sharePost('${post.link}')">🔗 Share</button>
+                    </div>
+                    
+                    <a href="${post.link}" target="_blank" class="btn-outline" style="width: 100%; margin-top: 15px; text-align: center;">OPEN LINK &rarr;</a>
+                </div>
+            `;
+        }
+
         function renderArchiveFeed(categoryName) {
             const container = document.getElementById('archiveGridContainer');
             container.innerHTML = '';
@@ -656,28 +737,13 @@
                 container.innerHTML = '<p style="text-align:left; color: var(--text-muted); font-style: italic; grid-column: 1 / -1;">No creations found in this category yet. Be the first!</p>';
             } else {
                 filteredPosts.forEach(post => {
-                    let badgeColor = "var(--accent-red)";
-                    if (post.category === "Fan Game") badgeColor = "#0066cc";
-                    if (post.category === "Discussion") badgeColor = "#ff9900";
-
-                    const html = `
-                        <div class="feed-card glass-card" style="display: flex; flex-direction: column;">
-                            <div class="feed-header">
-                                <span class="feed-category" style="background: ${badgeColor};">${post.category}</span>
-                                <span class="feed-author">by @${post.author}</span>
-                            </div>
-                            <h3 class="feed-title" style="font-size: 1.3rem;">${post.title}</h3>
-                            <p class="feed-desc" style="flex-grow: 1;">${post.description}</p>
-                            <a href="${post.link}" target="_blank" class="btn-outline" style="width: 100%; margin-top: 15px; text-align: center;">OPEN LINK &rarr;</a>
-                        </div>
-                    `;
-                    container.innerHTML += html;
+                    container.innerHTML += createPostHTML(post);
                 });
             }
         }
 
 
-        // -- MODAL KONTROLLERİ --
+        // -- MODAL & AUTH KONTROLLERİ --
         const authModal = document.getElementById('authModal');
         const postModal = document.getElementById('postModal');
         let currentAuthMode = 'login';
@@ -696,7 +762,6 @@
         document.getElementById('bottomSignupBtn').addEventListener('click', () => openAuth('signup'));
         document.getElementById('closeAuthBtn').addEventListener('click', () => authModal.style.display = 'none');
         
-        // Yeni post eklendiğinde eğer arşiv sayfasındaysa kategoriyi oto seç
         document.getElementById('newPostBtn').addEventListener('click', () => {
             const pageTitle = document.getElementById('archiveTitle').innerText;
             const categorySelect = document.getElementById('postCategory');
@@ -713,8 +778,6 @@
         document.getElementById('closePostBtn').addEventListener('click', () => postModal.style.display = 'none');
         document.getElementById('switchAuthModeBtn').addEventListener('click', () => { openAuth(currentAuthMode === 'signup' ? 'login' : 'signup'); });
 
-
-        // -- 1. GİRİŞ/KAYIT (AUTH) İŞLEMLERİ --
         const authForm = document.getElementById('authForm');
         const submitBtn = document.getElementById('authSubmitBtn');
         const errorDiv = document.getElementById('authError');
@@ -755,7 +818,7 @@
 
         document.getElementById('logoutBtn').addEventListener('click', () => { signOut(auth); });
 
-        // -- 2. YENİ POST GÖNDERME --
+        // -- YENİ POST GÖNDERME --
         const postForm = document.getElementById('postForm');
         const postSubmitBtn = document.getElementById('postSubmitBtn');
         const postMessage = document.getElementById('postMessage');
@@ -774,6 +837,7 @@
             try {
                 await addDoc(collection(db, "posts"), {
                     category: document.getElementById('postCategory').value,
+                    vibe: document.getElementById('postVibe').value,
                     title: document.getElementById('postTitle').value,
                     description: document.getElementById('postDesc').value,
                     link: document.getElementById('postLink').value,
@@ -798,7 +862,7 @@
             }
         });
 
-        // -- 3. CANLI POST AKIŞI (GENEL LİSTE) --
+        // -- CANLI POST AKIŞI --
         const feedContainer = document.getElementById('communityFeed');
         const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
         
@@ -813,31 +877,21 @@
                 return;
             }
 
-            snapshot.forEach((doc) => {
-                const post = doc.data();
+            snapshot.forEach((docSnapshot) => {
+                const post = docSnapshot.data();
+                post.id = docSnapshot.id; 
                 if(!post.title) return;
                 
                 window.allCommunityPosts.push(post); 
-
-                let badgeColor = "var(--accent-red)";
-                if (post.category === "Fan Game") badgeColor = "#0066cc";
-                if (post.category === "Discussion") badgeColor = "#ff9900";
-
-                const html = `
-                    <div class="feed-card glass-card">
-                        <div class="feed-header">
-                            <span class="feed-category" style="background: ${badgeColor};">${post.category}</span>
-                            <span class="feed-author">by @${post.author}</span>
-                        </div>
-                        <h3 class="feed-title">${post.title}</h3>
-                        <p class="feed-desc">${post.description}</p>
-                        <a href="${post.link}" target="_blank" class="btn-outline" style="align-self: flex-start; padding: 10px 20px; font-size: 0.8rem; margin-top: 15px;">OPEN LINK &rarr;</a>
-                    </div>
-                `;
-                feedContainer.innerHTML += html; 
             });
             
-            // Eğer o an arşiv sayfasındaysa, arşivi de güncelle
+            // ANA SAYFAYA SADECE SON 5 POSTU EKLE
+            const latestFive = window.allCommunityPosts.slice(0, 5);
+            latestFive.forEach(post => {
+                feedContainer.innerHTML += createPostHTML(post);
+            });
+
+            // EĞER ARŞİV SAYFASI AÇIKSA, ORAYI DA GÜNCELLE
             if(archivePageView.style.display === 'block') {
                 const currentTitle = document.getElementById('archiveTitle').innerText;
                 let cat = "Discussion";
@@ -847,7 +901,6 @@
             }
         });
 
-        // Random Fic Fonksiyonu
         window.openRandomFic = function() {
             const fics = window.allCommunityPosts.filter(post => post.category === "Fan Fiction");
             if(fics.length === 0) {
@@ -860,6 +913,7 @@
         }
     </script>
 
+    <!-- UI Fonksiyonları -->
     <script>
         function toggleSection(id) {
             const section = document.getElementById(id);
@@ -872,11 +926,6 @@
         }
         function openModal(id) { document.getElementById(id).style.display = "block"; }
         function closeModal(id) { document.getElementById(id).style.display = "none"; }
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = "none";
-            }
-        }
     </script>
 </body>
 </html>
