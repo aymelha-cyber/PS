@@ -159,15 +159,7 @@
         .showcase-info h3 { font-size: 1.8rem; color: var(--text-main); margin-bottom: 10px; letter-spacing: 1px; }
         .showcase-info p { color: #d1d1d1; line-height: 1.7; margin-bottom: 25px; font-size: 1rem; }
         .showcase-info strong { color: white; }
-        
-        /* İZLEME BİLGİSİ BEYAZ DİKDÖRTGEN (GÜNCELLENDİ) */
-        .watch-info { 
-            display: inline-flex; align-items: center; gap: 10px; 
-            background: white; color: #050002; 
-            padding: 10px 20px; border-radius: 6px; 
-            font-size: 0.9rem; font-weight: bold; align-self: flex-start;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
+        .watch-info { display: inline-flex; align-items: center; gap: 10px; background: white; color: black; padding: 10px 20px; border-radius: 4px; font-size: 0.9rem; font-weight: bold; align-self: flex-start; }
         .watch-icon { color: var(--accent-red); font-size: 1.1rem; }
 
         .music-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -290,7 +282,6 @@
             .the-duo > div:last-child { flex-direction: column; gap: 15px !important; }
             .showcase-card { flex-direction: column; align-items: center; text-align: center; gap: 15px; padding: 15px; }
             
-            /* MOBİLDE İZLEME BİLGİSİ BEYAZ BUTON */
             .watch-info { align-self: center; font-size: 0.8rem; padding: 8px 12px; width: 100%; justify-content: center; background: white; color: black; border: none; }
             
             .square-placeholder { width: 120px; height: 120px; }
@@ -677,7 +668,7 @@
         </div>
     </div>
 
-    <!-- YENİ POST PAYLAŞMA EKRANI -->
+    <!-- YENİ POST PAYLAŞMA EKRANI (AKILLI FORM) -->
     <div id="postModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('postModal')">&times;</span>
@@ -692,7 +683,7 @@
                     <option value="Discussion">Discussion / Theory</option>
                 </select>
                 
-                <select id="postVibe" class="post-input" required>
+                <select id="postVibe" class="post-input">
                     <option value="" disabled selected>Select Content Vibe / Genre</option>
                     <option value="Fluff ☁️">Fluff ☁️</option>
                     <option value="Angst 💔">Angst 💔</option>
@@ -705,13 +696,13 @@
 
                 <input type="text" id="postTitle" class="post-input" placeholder="Title of your work" required>
                 <textarea id="postDesc" class="post-input" placeholder="Brief Description..." rows="3" required></textarea>
-                <input type="url" id="postLink" class="post-input" placeholder="Link (e.g., Wattpad, AO3, GitHub)" required>
+                <input type="url" id="postLink" class="post-input" placeholder="Link">
                 <button type="submit" id="postSubmitBtn" class="btn" style="width: 100%; margin-top: 5px; padding: 14px;">SHARE WITH COMMUNITY</button>
             </form>
         </div>
     </div>
 
-    <!-- POST DÜZENLEME EKRANI -->
+    <!-- POST DÜZENLEME EKRANI (AKILLI FORM) -->
     <div id="editPostModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('editPostModal')">&times;</span>
@@ -725,7 +716,7 @@
                     <option value="Discussion">Discussion / Theory</option>
                 </select>
                 
-                <select id="editPostVibe" class="post-input" required>
+                <select id="editPostVibe" class="post-input">
                     <option value="Fluff ☁️">Fluff ☁️</option>
                     <option value="Angst 💔">Angst 💔</option>
                     <option value="Alternate Universe 🌌">Alternate Universe 🌌</option>
@@ -737,7 +728,7 @@
 
                 <input type="text" id="editPostTitle" class="post-input" required>
                 <textarea id="editPostDesc" class="post-input" rows="3" required></textarea>
-                <input type="url" id="editPostLink" class="post-input" required>
+                <input type="url" id="editPostLink" class="post-input" placeholder="Link">
                 <button type="submit" id="editPostSubmitBtn" class="btn" style="width: 100%; margin-top: 5px; padding: 14px;">UPDATE POST</button>
             </form>
         </div>
@@ -811,11 +802,59 @@
         
         function containsHateSpeech(text) {
             if(!text) return false;
-            // Regex ile tam kelime eşleşmesi (\b) aranır ki başka kelimelerin içinde geçen harfler engellenmesin.
             const pattern = "\\b(" + bannedWords.join("|") + ")\\b";
             const regex = new RegExp(pattern, "i");
             return regex.test(text);
         }
+
+        // ==========================================
+        // AKILLI FORM MANTIĞI (SMART FORM)
+        // ==========================================
+        const postCat = document.getElementById('postCategory');
+        const postVibe = document.getElementById('postVibe');
+        const postLink = document.getElementById('postLink');
+
+        postCat.addEventListener('change', () => {
+            const val = postCat.value;
+            if(val === 'Fan Fiction') {
+                postVibe.style.display = 'block';
+                postLink.required = true;
+                postLink.placeholder = "Link (e.g., Wattpad, AO3) *Required";
+            } else if(val === 'Fan Game') {
+                postVibe.style.display = 'none';
+                postLink.required = true;
+                postLink.placeholder = "Link to the game *Required";
+            } else if(val === 'Discussion') {
+                postVibe.style.display = 'none';
+                postLink.required = false;
+                postLink.placeholder = "Link (Optional)";
+            } else {
+                postVibe.style.display = 'none';
+                postLink.required = false;
+                postLink.placeholder = "Link";
+            }
+        });
+
+        const editCat = document.getElementById('editPostCategory');
+        const editVibe = document.getElementById('editPostVibe');
+        const editLink = document.getElementById('editPostLink');
+
+        editCat.addEventListener('change', () => {
+            const val = editCat.value;
+            if(val === 'Fan Fiction') {
+                editVibe.style.display = 'block';
+                editLink.required = true;
+                editLink.placeholder = "Link *Required";
+            } else if(val === 'Fan Game') {
+                editVibe.style.display = 'none';
+                editLink.required = true;
+                editLink.placeholder = "Link *Required";
+            } else if(val === 'Discussion') {
+                editVibe.style.display = 'none';
+                editLink.required = false;
+                editLink.placeholder = "Link (Optional)";
+            }
+        });
 
         // -- YENİ NESİL SAYFA DEĞİŞTİRİCİ (SPA) --
         const homePageView = document.getElementById('homePageView');
@@ -864,6 +903,10 @@
         }
 
         window.sharePost = function(link) {
+            if(!link || link.trim() === "") {
+                alert("This post doesn't have a direct link.");
+                return;
+            }
             navigator.clipboard.writeText(link).then(() => {
                 alert("Link copied! Ready to share with the fandom.");
             }).catch(() => {
@@ -888,10 +931,14 @@
             
             window.currentEditPostId = postId;
             document.getElementById('editPostCategory').value = post.category;
-            document.getElementById('editPostVibe').value = post.vibe || 'General 📌';
+            
+            // Akıllı Form Güncellemesi için eventi tetikle
+            document.getElementById('editPostCategory').dispatchEvent(new Event('change'));
+
+            document.getElementById('editPostVibe').value = post.vibe || '';
             document.getElementById('editPostTitle').value = post.title;
             document.getElementById('editPostDesc').value = post.description;
-            document.getElementById('editPostLink').value = post.link;
+            document.getElementById('editPostLink').value = post.link || '';
             document.getElementById('editPostModal').style.display = 'block';
         }
 
@@ -903,6 +950,11 @@
             
             const newTitle = document.getElementById('editPostTitle').value;
             const newDesc = document.getElementById('editPostDesc').value;
+            
+            let newVibe = document.getElementById('editPostVibe').value;
+            if(document.getElementById('editPostVibe').style.display === 'none' || !newVibe) {
+                newVibe = "General 📌";
+            }
 
             // Filtre Kontrolü
             if(containsHateSpeech(newTitle) || containsHateSpeech(newDesc)) {
@@ -917,10 +969,10 @@
             try {
                 await updateDoc(doc(db, "posts", window.currentEditPostId), {
                     category: document.getElementById('editPostCategory').value,
-                    vibe: document.getElementById('editPostVibe').value,
+                    vibe: newVibe,
                     title: newTitle,
                     description: newDesc,
-                    link: document.getElementById('editPostLink').value
+                    link: document.getElementById('editPostLink').value || ""
                 });
                 msg.style.color = "#4caf50";
                 msg.innerText = "Post updated successfully!";
@@ -960,24 +1012,38 @@
                 `;
             }
 
+            // Link varsa göster, yoksa gizle
+            let linkHTML = '';
+            let shareBtnHTML = '';
+            if (post.link && post.link.trim() !== "") {
+                linkHTML = `<a href="${post.link}" target="_blank" class="btn-outline" style="width: 100%; margin-top: 15px; text-align: center;">OPEN LINK &rarr;</a>`;
+                shareBtnHTML = `<button class="share-btn" style="width: 100%; justify-content: center;" onclick="sharePost('${post.link}')">🔗 Share</button>`;
+            }
+
+            const displayVibe = post.vibe || "General 📌";
+            
+            // Eğer Vibe General ise ve oyun/tartışmaysa etiketi göstermeyebiliriz ama tutmak tasarımı bozmaz.
+            let vibeBadgeHTML = `<span class="vibe-badge">${displayVibe}</span>`;
+            if(post.category !== "Fan Fiction") vibeBadgeHTML = ""; // Sadece Fan Fiction'da Vibe göster!
+
             return `
                 <div class="feed-card glass-card" style="display: flex; flex-direction: column;">
                     <div class="feed-header">
                         <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                             <span class="feed-category" style="background: ${badgeColor};">${post.category}</span>
-                            <span class="vibe-badge">${post.vibe || 'General 📌'}</span>
+                            ${vibeBadgeHTML}
                         </div>
                         <span class="feed-author" style="margin-top: 5px;">by @${post.author} <span style="color: #888; font-weight: normal; margin-left: 5px;">• ${dateStr}</span></span>
                     </div>
                     <h3 class="feed-title" style="font-size: 1.3rem;">${post.title}</h3>
-                    <p class="feed-desc" style="flex-grow: 1;">${post.description}</p>
+                    <p class="feed-desc" style="flex-grow: 1; white-space: pre-wrap;">${post.description}</p>
                     
                     <div class="interaction-bar" style="justify-content: space-between; flex-direction: column;">
-                        <button class="share-btn" style="width: 100%; justify-content: center;" onclick="sharePost('${post.link}')">🔗 Share</button>
+                        ${shareBtnHTML}
                         ${controlsHTML}
                     </div>
                     
-                    <a href="${post.link}" target="_blank" class="btn-outline" style="width: 100%; margin-top: 15px; text-align: center;">OPEN LINK &rarr;</a>
+                    ${linkHTML}
                 </div>
             `;
         }
@@ -1029,6 +1095,10 @@
             } else {
                 categorySelect.value = "";
             }
+            
+            // Akıllı Form Güncellemesi için eventi tetikle
+            categorySelect.dispatchEvent(new Event('change'));
+            
             document.getElementById('postModal').style.display = 'block';
         }
 
@@ -1093,6 +1163,11 @@
 
             const title = document.getElementById('postTitle').value;
             const desc = document.getElementById('postDesc').value;
+            
+            let vibe = document.getElementById('postVibe').value;
+            if (document.getElementById('postVibe').style.display === 'none' || !vibe) {
+                vibe = "General 📌"; // Görünmüyorsa veya seçilmediyse General olsun
+            }
 
             // Filtre Kontrolü
             if(containsHateSpeech(title) || containsHateSpeech(desc)) {
@@ -1108,10 +1183,10 @@
             try {
                 await addDoc(collection(db, "posts"), {
                     category: document.getElementById('postCategory').value,
-                    vibe: document.getElementById('postVibe').value,
+                    vibe: vibe,
                     title: title,
                     description: desc,
-                    link: document.getElementById('postLink').value,
+                    link: document.getElementById('postLink').value || "",
                     author: auth.currentUser.email.split('@')[0],
                     createdAt: serverTimestamp() 
                 });
@@ -1158,7 +1233,11 @@
             }
             const random = Math.floor(Math.random() * fics.length);
             const selectedFic = fics[random];
-            window.open(selectedFic.link, '_blank'); 
+            if (selectedFic.link && selectedFic.link.trim() !== "") {
+                window.open(selectedFic.link, '_blank'); 
+            } else {
+                alert("The selected random fic doesn't have a direct link.");
+            }
         }
     </script>
 
