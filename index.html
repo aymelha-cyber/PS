@@ -108,14 +108,12 @@
         .page-view { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 1. Hero Section */
         .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-bottom: 100px; align-items: center; }
         .hero-text h1 { font-size: 4.5rem; color: var(--text-main); margin-bottom: 15px; line-height: 1; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
         .hero-text h1 span { color: var(--accent-red); font-size: 2.2rem; display: block; letter-spacing: 6px; margin-top: 10px; text-shadow: 0 0 15px rgba(255,0,51,0.4); }
         .hero-text p { color: var(--text-muted); margin-bottom: 40px; font-size: 1.2rem; font-weight: 300; line-height: 1.8; }
         .hero-image { width: 100%; height: 500px; }
 
-        /* 2. Who is PerthSanta Section */
         .about-ps { padding: 60px; margin-bottom: 80px; position: relative; overflow: hidden; }
         .about-ps::before { content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--accent-red); box-shadow: 0 0 15px rgba(255,0,51,0.8); }
         
@@ -131,7 +129,6 @@
 
         .the-duo { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(30,0,5,0.8), rgba(60,0,15,0.6)); padding: 40px; margin-top: 20px; }
         
-        /* 3. Official Content Cards */
         .official-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 50px; }
         .card { padding: 50px 40px; display: flex; flex-direction: column; align-items: center; text-align: center; }
         .card:hover { border-color: var(--accent-red); transform: translateY(-4px); }
@@ -140,7 +137,6 @@
         .card h2 { font-size: 2.2rem; margin-bottom: 15px; color: var(--text-main); letter-spacing: 2px; }
         .card p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 35px; line-height: 1.7; max-width: 450px; }
 
-        /* GİZLİ DETAY BÖLÜMLERİ */
         .hidden-detail-section { display: none; margin-bottom: 80px; padding: 50px; background: rgba(5,0,2,0.9); animation: slideDown 0.4s ease-out; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -148,7 +144,6 @@
         .detail-header h2 { font-size: 2.5rem; color: #ffffff; letter-spacing: 2px; }
         .detail-header p { color: var(--accent-red); font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 10px; font-weight: bold; }
 
-        /* Showcase & Music */
         .showcase-grid { display: flex; flex-direction: column; gap: 30px; }
         .showcase-card { padding: 30px; gap: 40px; display: flex; background: rgba(20,0,10,0.4); }
         .showcase-card:hover { border-color: rgba(255,255,255,0.3); background: rgba(30,0,15,0.6); }
@@ -173,9 +168,7 @@
         .yt-link:hover { background: white; color: black; border-color: white; transform: translateX(5px); }
         .yt-link span { color: var(--accent-red); font-size: 1.1rem; }
         .full-width-card { grid-column: 1 / -1; }
-        .ost-split { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
 
-        /* 6. Community Section */
         .community-area { padding: 60px 50px; margin-bottom: 100px; }
         .community-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 40px; }
         .community-card { padding: 40px 25px; text-align: center; display: flex; flex-direction: column; align-items: center; background: rgba(10,0,5,0.5); }
@@ -184,26 +177,25 @@
         .community-card h3 { color: var(--text-main); margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px; }
         .community-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; flex-grow: 1; line-height: 1.6; }
         
-        /* Dinamik Akış Kartları (Ana Sayfa) */
+        /* Dinamik Akış Kartları */
         .feed-container { display: flex; flex-direction: column; gap: 20px; margin-top: 30px; }
         .feed-card { padding: 25px 30px; display: flex; flex-direction: column; gap: 12px; background: rgba(10,0,5,0.6); }
         .feed-card:hover { border-color: rgba(255,255,255,0.3); background: rgba(20,0,10,0.8); }
         .feed-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
         .feed-category { background: var(--accent-red); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* Vibe Badge Stili */
         .vibe-badge { background: rgba(255,255,255,0.1); color: #e0e0e0; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; border: 1px solid rgba(255,255,255,0.2); }
         
         .feed-author { color: var(--text-muted); font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 5px; }
         .feed-title { color: white; font-size: 1.4rem; letter-spacing: 1px; font-family: var(--font-serif); margin-top: 5px; }
         .feed-desc { color: #c4c4c4; font-size: 0.95rem; line-height: 1.6; }
         
-        /* Etkileşim Butonları (Share) */
-        .interaction-bar { display: flex; gap: 15px; margin-top: 15px; align-items: center; }
+        /* Etkileşim Butonları (Share, Edit, Delete) */
+        .interaction-bar { display: flex; gap: 15px; margin-top: 15px; align-items: center; flex-wrap: wrap; }
         .share-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
         .share-btn:hover { background: white; color: black; transform: scale(1.05); }
 
-        /* --------- ARŞİV SAYFASI TASARIMI --------- */
+        /* ARŞİV SAYFASI TASARIMI */
         .archive-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; margin-bottom: 40px; }
         .archive-title { font-size: 3rem; color: white; font-family: var(--font-serif); text-transform: uppercase; letter-spacing: 2px; }
         .archive-subtitle { color: var(--text-muted); font-size: 1.1rem; }
@@ -235,9 +227,9 @@
         .auth-input:focus, .post-input:focus { outline: none; border-color: var(--accent-red); background: rgba(20,0,5,0.8); box-shadow: 0 0 10px rgba(255,0,51,0.2); }
         select.post-input option { background: #0a0005; color: white; }
         
-        #authError, #postMessage { font-size: 0.85rem; text-align: center; margin-bottom: 10px; min-height: 20px; font-weight: bold; }
+        #authError, #postMessage, #editPostMessage { font-size: 0.85rem; text-align: center; margin-bottom: 10px; min-height: 20px; font-weight: bold; }
         #authError { color: var(--accent-red); }
-        #postMessage { color: #4caf50; }
+        #postMessage, #editPostMessage { color: #4caf50; }
 
         @media (max-width: 900px) {
             .hero, .official-content, .community-grid, .music-grid { grid-template-columns: 1fr; flex-direction: column; gap: 30px; }
@@ -265,7 +257,6 @@
                     <li><a onclick="showHomePage('#official')">Universe</a></li>
                     <li><a onclick="showHomePage('#community')">Community</a></li>
                     
-                    <!-- DİNAMİK BUTONLAR (HATA GİDERİLDİ) -->
                     <li id="loginNavLi"><a class="signup-link no-line" style="cursor:pointer;" onclick="openAuth('login')">LOG IN</a></li>
                     
                     <li id="userPanelLi" class="user-panel">
@@ -485,10 +476,10 @@
                 <button class="btn" style="padding: 16px 50px; font-size: 1.1rem;" onclick="openAuth('signup')">JOIN & SIGN UP &rarr;</button>
             </div>
 
-            <!-- CANLI POST AKIŞI (SADECE SON 5 POST) -->
+            <!-- CANLI POST AKIŞI -->
             <div style="margin-top: 80px; padding-top: 40px; border-top: 2px dashed rgba(255,0,51,0.3);">
                 <h2 style="font-family: var(--font-serif); font-size: 2rem; color: white; margin-bottom: 10px; text-align: center;">LATEST UPDATES</h2>
-                <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px;">The newest 5 creations across the universe.</p>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px;">The newest creations across the universe.</p>
                 
                 <div id="communityFeed" class="feed-container">
                     <p style="text-align:center; color: var(--text-muted);">Loading universe data...</p>
@@ -499,7 +490,7 @@
     </main> <!-- Ana Sayfa (Container) Sonu -->
 
 
-    <!-- ==================== GERÇEK SAYFA GEÇİŞİ: ARŞİV SAYFASI ==================== -->
+    <!-- ==================== ARŞİV SAYFASI (TAM EKRAN) ==================== -->
     <main id="archivePageView" class="container page-view" style="display: none; padding-top: 20px;">
         
         <div style="margin-bottom: 30px;">
@@ -516,7 +507,6 @@
             </div>
         </div>
 
-        <!-- Sadece Fan Fiction Kategorisinde Çıkan "Bana Önerme Yap" Banner'ı -->
         <div id="suggestBanner" class="suggest-banner">
             <h3>Not sure what to read today?</h3>
             <p>Let the archive pick a random story for you!</p>
@@ -524,7 +514,7 @@
         </div>
 
         <div id="archiveGridContainer" class="archive-grid">
-            <!-- Kategorinin Tüm Postları Buraya Yan Yana (Grid) Dizilecek -->
+            <!-- Kategorinin Tüm Postları Buraya Dizilecek -->
         </div>
 
     </main>
@@ -545,7 +535,7 @@
         </footer>
     </div>
 
-    <!-- Modallar (Auth, Post, vs.) -->
+    <!-- Modallar -->
     <div id="authModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('authModal')">&times;</span>
@@ -564,6 +554,7 @@
         </div>
     </div>
 
+    <!-- YENİ POST PAYLAŞMA EKRANI -->
     <div id="postModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('postModal')">&times;</span>
@@ -578,7 +569,6 @@
                     <option value="Discussion">Discussion / Theory</option>
                 </select>
                 
-                <!-- YENİ: VIBE / GENRE SEÇİMİ -->
                 <select id="postVibe" class="post-input" required>
                     <option value="" disabled selected>Select Content Vibe / Genre</option>
                     <option value="Fluff ☁️">Fluff ☁️</option>
@@ -594,6 +584,38 @@
                 <textarea id="postDesc" class="post-input" placeholder="Brief Description..." rows="3" required></textarea>
                 <input type="url" id="postLink" class="post-input" placeholder="Link (e.g., Wattpad, AO3, GitHub)" required>
                 <button type="submit" id="postSubmitBtn" class="btn" style="width: 100%; margin-top: 5px; padding: 14px;">SHARE WITH COMMUNITY</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ✏️ POST DÜZENLEME EKRANI (YENİ EKLENDİ) -->
+    <div id="editPostModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('editPostModal')">&times;</span>
+            <h2>Edit Post</h2>
+            <p style="text-align: center; margin-bottom: 20px; color: var(--text-muted); font-size: 0.9rem;">Update your creation details.</p>
+            <div id="editPostMessage"></div>
+            <form id="editPostForm">
+                <select id="editPostCategory" class="post-input" required>
+                    <option value="Fan Fiction">Fan Fiction</option>
+                    <option value="Fan Game">Fan Game</option>
+                    <option value="Discussion">Discussion / Theory</option>
+                </select>
+                
+                <select id="editPostVibe" class="post-input" required>
+                    <option value="Fluff ☁️">Fluff ☁️</option>
+                    <option value="Angst 💔">Angst 💔</option>
+                    <option value="Alternate Universe 🌌">Alternate Universe 🌌</option>
+                    <option value="Mystery / Thriller 🔍">Mystery / Thriller 🔍</option>
+                    <option value="Spicy 🔥">Spicy 🔥</option>
+                    <option value="Action ⚔️">Action ⚔️</option>
+                    <option value="General 📌">General 📌</option>
+                </select>
+
+                <input type="text" id="editPostTitle" class="post-input" required>
+                <textarea id="editPostDesc" class="post-input" rows="3" required></textarea>
+                <input type="url" id="editPostLink" class="post-input" required>
+                <button type="submit" id="editPostSubmitBtn" class="btn" style="width: 100%; margin-top: 5px; padding: 14px;">UPDATE POST</button>
             </form>
         </div>
     </div>
@@ -633,7 +655,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyAWA9jd1ud0F7aLuqY6L_Fy4f0JhgO12lk",
@@ -689,10 +711,9 @@
             archivePageView.style.display = 'block';
             window.scrollTo(0, 0);
 
-            renderArchiveFeed(categoryName);
+            renderFeeds();
         }
 
-        // Share (Kopyala) İşlemi
         window.sharePost = function(link) {
             navigator.clipboard.writeText(link).then(() => {
                 alert("Link copied! Ready to share with the fandom.");
@@ -701,11 +722,84 @@
             });
         }
 
+        // -- YENİ: POST SİLME VE DÜZENLEME MANTIĞI --
+        
+        // Silme İşlemi
+        window.deletePost = async function(postId) {
+            if(confirm("Are you sure you want to delete this post? This action cannot be undone.")) {
+                try {
+                    await deleteDoc(doc(db, "posts", postId));
+                } catch(error) {
+                    alert("Error deleting post: " + error.message);
+                }
+            }
+        }
+
+        // Düzenleme (Edit) Ekranını Açma
+        window.currentEditPostId = null;
+        window.openEditPost = function(postId) {
+            const post = window.allCommunityPosts.find(p => p.id === postId);
+            if(!post) return;
+            
+            window.currentEditPostId = postId;
+            document.getElementById('editPostCategory').value = post.category;
+            document.getElementById('editPostVibe').value = post.vibe || 'General 📌';
+            document.getElementById('editPostTitle').value = post.title;
+            document.getElementById('editPostDesc').value = post.description;
+            document.getElementById('editPostLink').value = post.link;
+            document.getElementById('editPostModal').style.display = 'block';
+        }
+
+        // Düzenleme Formunu Gönderme
+        document.getElementById('editPostForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('editPostSubmitBtn');
+            const msg = document.getElementById('editPostMessage');
+            submitBtn.disabled = true;
+            submitBtn.innerText = "UPDATING...";
+            
+            try {
+                await updateDoc(doc(db, "posts", window.currentEditPostId), {
+                    category: document.getElementById('editPostCategory').value,
+                    vibe: document.getElementById('editPostVibe').value,
+                    title: document.getElementById('editPostTitle').value,
+                    description: document.getElementById('editPostDesc').value,
+                    link: document.getElementById('editPostLink').value
+                });
+                msg.style.color = "#4caf50";
+                msg.innerText = "Post updated successfully!";
+                setTimeout(() => {
+                    document.getElementById('editPostModal').style.display = 'none';
+                    msg.innerText = "";
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "UPDATE POST";
+                }, 1500);
+            } catch(error) {
+                msg.style.color = "var(--accent-red)";
+                msg.innerText = "Error: " + error.message;
+                submitBtn.disabled = false;
+                submitBtn.innerText = "UPDATE POST";
+            }
+        });
+
+
         // -- POST KARTINI OLUŞTURAN ORTAK FONKSİYON --
         function createPostHTML(post) {
             let badgeColor = "var(--accent-red)";
             if (post.category === "Fan Game") badgeColor = "#0066cc";
             if (post.category === "Discussion") badgeColor = "#ff9900";
+
+            let controlsHTML = '';
+            
+            // Eğer giriş yapılmışsa ve postu atan kişi giriş yapan kişiyse (Edit ve Delete çıkar)
+            if (auth.currentUser && auth.currentUser.email.split('@')[0] === post.author) {
+                controlsHTML = `
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn-outline" style="padding: 6px 12px; font-size: 0.75rem; border-color: #ffaa00; color: #ffaa00;" onclick="openEditPost('${post.id}')">✏️ Edit</button>
+                        <button class="btn-outline" style="padding: 6px 12px; font-size: 0.75rem; border-color: var(--accent-red); color: var(--accent-red);" onclick="deletePost('${post.id}')">🗑️ Delete</button>
+                    </div>
+                `;
+            }
 
             return `
                 <div class="feed-card glass-card" style="display: flex; flex-direction: column;">
@@ -719,8 +813,9 @@
                     <h3 class="feed-title" style="font-size: 1.3rem;">${post.title}</h3>
                     <p class="feed-desc" style="flex-grow: 1;">${post.description}</p>
                     
-                    <div class="interaction-bar">
+                    <div class="interaction-bar" style="justify-content: space-between;">
                         <button class="share-btn" onclick="sharePost('${post.link}')">🔗 Share</button>
+                        ${controlsHTML}
                     </div>
                     
                     <a href="${post.link}" target="_blank" class="btn-outline" style="width: 100%; margin-top: 15px; text-align: center;">OPEN LINK &rarr;</a>
@@ -728,18 +823,39 @@
             `;
         }
 
-        function renderArchiveFeed(categoryName) {
-            const container = document.getElementById('archiveGridContainer');
-            container.innerHTML = '';
+        // Akışları Ortak Güncelleyen Fonksiyon
+        window.renderFeeds = function() {
+            // Ana Sayfa Güncellemesi
+            const homeFeed = document.getElementById('communityFeed');
+            homeFeed.innerHTML = ''; 
             
-            const filteredPosts = window.allCommunityPosts.filter(post => post.category === categoryName);
-            
-            if(filteredPosts.length === 0) {
-                container.innerHTML = '<p style="text-align:left; color: var(--text-muted); font-style: italic; grid-column: 1 / -1;">No creations found in this category yet. Be the first!</p>';
+            if (window.allCommunityPosts.length === 0) {
+                homeFeed.innerHTML = '<p style="text-align:center; color: var(--text-muted); font-style: italic;">No posts yet. Be the first to share a creation!</p>';
             } else {
-                filteredPosts.forEach(post => {
-                    container.innerHTML += createPostHTML(post);
+                const latestFive = window.allCommunityPosts.slice(0, 5);
+                latestFive.forEach(post => {
+                    homeFeed.innerHTML += createPostHTML(post);
                 });
+            }
+
+            // Arşiv Sayfası Açıksa Orayı da Güncelle
+            if(document.getElementById('archivePageView').style.display === 'block') {
+                const currentTitle = document.getElementById('archiveTitle').innerText;
+                let cat = "Discussion";
+                if(currentTitle.includes('Fic')) cat = "Fan Fiction";
+                else if(currentTitle.includes('Interactive')) cat = "Fan Game";
+                
+                const archiveFeed = document.getElementById('archiveGridContainer');
+                archiveFeed.innerHTML = '';
+                const filteredPosts = window.allCommunityPosts.filter(post => post.category === cat);
+                
+                if(filteredPosts.length === 0) {
+                    archiveFeed.innerHTML = '<p style="text-align:left; color: var(--text-muted); font-style: italic; grid-column: 1 / -1;">No creations found in this category yet. Be the first!</p>';
+                } else {
+                    filteredPosts.forEach(post => {
+                        archiveFeed.innerHTML += createPostHTML(post);
+                    });
+                }
             }
         }
 
@@ -809,6 +925,11 @@
                 document.getElementById('userEmailDisplay').innerText = "";
                 document.getElementById('joinCommunityPrompt').style.display = 'block';
             }
+
+            // Giriş / Çıkış yapıldığında Edit ve Delete butonlarının ekranda güncellenmesi için:
+            if(window.allCommunityPosts && window.allCommunityPosts.length > 0) {
+                renderFeeds();
+            }
         });
 
         window.logoutUser = function() {
@@ -859,21 +980,13 @@
             }
         });
 
-        // -- CANLI POST AKIŞI --
-        const feedContainer = document.getElementById('communityFeed');
+        // -- CANLI POST AKIŞI (OnSnapshot) --
         const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
-        
         window.allCommunityPosts = [];
 
         onSnapshot(q, (snapshot) => {
             window.allCommunityPosts = [];
-            feedContainer.innerHTML = ''; 
             
-            if (snapshot.empty) {
-                feedContainer.innerHTML = '<p style="text-align:center; color: var(--text-muted); font-style: italic;">No posts yet. Be the first to share a creation!</p>';
-                return;
-            }
-
             snapshot.forEach((docSnapshot) => {
                 const post = docSnapshot.data();
                 post.id = docSnapshot.id; 
@@ -882,20 +995,8 @@
                 window.allCommunityPosts.push(post); 
             });
             
-            // ANA SAYFAYA SADECE SON 5 POSTU EKLE
-            const latestFive = window.allCommunityPosts.slice(0, 5);
-            latestFive.forEach(post => {
-                feedContainer.innerHTML += createPostHTML(post);
-            });
-
-            // EĞER ARŞİV SAYFASI AÇIKSA, ORAYI DA GÜNCELLE
-            if(document.getElementById('archivePageView').style.display === 'block') {
-                const currentTitle = document.getElementById('archiveTitle').innerText;
-                let cat = "Discussion";
-                if(currentTitle.includes('Fic')) cat = "Fan Fiction";
-                else if(currentTitle.includes('Interactive')) cat = "Fan Game";
-                renderArchiveFeed(cat);
-            }
+            // Tüm veriler yüklendikten sonra ekranı çiz
+            renderFeeds();
         });
 
         window.openRandomFic = function() {
@@ -923,11 +1024,6 @@
         }
         function openModal(id) { document.getElementById(id).style.display = "block"; }
         function closeModal(id) { document.getElementById(id).style.display = "none"; }
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = "none";
-            }
-        }
     </script>
 </body>
 </html>
