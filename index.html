@@ -191,19 +191,19 @@
         .feed-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
         .feed-category { background: var(--accent-red); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* YENİ: Vibe Badge Stili */
+        /* Vibe Badge Stili */
         .vibe-badge { background: rgba(255,255,255,0.1); color: #e0e0e0; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; border: 1px solid rgba(255,255,255,0.2); }
         
         .feed-author { color: var(--text-muted); font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 5px; }
         .feed-title { color: white; font-size: 1.4rem; letter-spacing: 1px; font-family: var(--font-serif); margin-top: 5px; }
         .feed-desc { color: #c4c4c4; font-size: 0.95rem; line-height: 1.6; }
         
-        /* Etkileşim Butonları (Sadece Share Kaldı) */
+        /* Etkileşim Butonları (Share) */
         .interaction-bar { display: flex; gap: 15px; margin-top: 15px; align-items: center; }
         .share-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
         .share-btn:hover { background: white; color: black; transform: scale(1.05); }
 
-        /* --------- YENİ: ARŞİV SAYFASI TASARIMI --------- */
+        /* --------- ARŞİV SAYFASI TASARIMI --------- */
         .archive-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; margin-bottom: 40px; }
         .archive-title { font-size: 3rem; color: white; font-family: var(--font-serif); text-transform: uppercase; letter-spacing: 2px; }
         .archive-subtitle { color: var(--text-muted); font-size: 1.1rem; }
@@ -220,6 +220,7 @@
         .footer-links { display: flex; gap: 30px; font-size: 0.9rem; color: var(--text-muted); font-weight: bold; letter-spacing: 1px; }
         .footer-links a:hover { color: white; cursor: pointer; }
 
+        /* Modallar */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
         .modal-content { background-color: #0a0005; margin: 10vh auto; padding: 40px; border: 1px solid rgba(255,255,255,0.2); border-top: 1px solid rgba(255,255,255,0.4); width: 90%; max-width: 500px; border-radius: 12px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); max-height: 80vh; overflow-y: auto; }
         .modal-content::-webkit-scrollbar { width: 8px; }
@@ -264,12 +265,13 @@
                     <li><a onclick="showHomePage('#official')">Universe</a></li>
                     <li><a onclick="showHomePage('#community')">Community</a></li>
                     
-                    <li id="loginNavLi"><a id="topLoginBtn" class="signup-link no-line" style="cursor:pointer;">LOG IN</a></li>
+                    <!-- DİNAMİK BUTONLAR (HATA GİDERİLDİ) -->
+                    <li id="loginNavLi"><a class="signup-link no-line" style="cursor:pointer;" onclick="openAuth('login')">LOG IN</a></li>
                     
                     <li id="userPanelLi" class="user-panel">
-                        <button id="newPostBtn" class="btn" style="padding: 8px 16px; font-size: 0.75rem; box-shadow: none;">+ NEW POST</button>
+                        <button class="btn" style="padding: 8px 16px; font-size: 0.75rem; box-shadow: none;" onclick="openPostPanel()">+ NEW POST</button>
                         <span id="userEmailDisplay" class="user-email"></span>
-                        <a id="logoutBtn" class="logout-link no-line">LOGOUT</a>
+                        <a class="logout-link no-line" onclick="logoutUser()">LOGOUT</a>
                     </li>
                 </ul>
             </nav>
@@ -432,7 +434,6 @@
                     <h3>PERTH SOLO</h3>
                     <p>Known for his raw vocals and impressive guitar skills, his solo tracks reflect a deeply personal side of his artistry.</p>
                     <div class="song-list">
-                        <!-- Şarkılar geri eklendi -->
                         <a href="https://youtu.be/fyx7IXtr6VE?si=q8wHJ9AdjxpCnPyU" target="_blank" class="yt-link"><span>▶</span> Secret</a>
                         <a href="https://youtu.be/2O1uI8Inb5Q?si=FGZPxhvAni4me5_F" target="_blank" class="yt-link"><span>▶</span> Numb</a>
                     </div>
@@ -443,7 +444,6 @@
                     <h3>JASPER (T-POP GROUP)</h3>
                     <p>Discover the rhythmic and highly energetic tracks by <strong>Jasper</strong>, combining captivating beats with dynamic flair.</p>
                     <div class="song-list">
-                        <!-- Şarkılar geri eklendi -->
                         <a href="https://youtu.be/YpVjU4OJ4Ms?si=kZEMp0rSEg7C3cWT" target="_blank" class="yt-link"><span>▶</span> Sadistic</a>
                         <a href="https://youtu.be/KO78TDSp_bo?si=vm8Utcn4nJzbSvwv" target="_blank" class="yt-link"><span>▶</span> Take It Off</a>
                         <a href="https://youtu.be/qLb9ZfWBxIw?si=1TwoA-zGPMJb7zp6" target="_blank" class="yt-link"><span>▶</span> Touch</a>
@@ -482,13 +482,13 @@
             
             <div id="joinCommunityPrompt" style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
                 <p style="margin-bottom: 15px; color: var(--text-muted);">Ready to share your own creations?</p>
-                <button onclick="openModal('authModal')" class="btn" style="padding: 16px 50px; font-size: 1.1rem;">JOIN & SIGN UP &rarr;</button>
+                <button class="btn" style="padding: 16px 50px; font-size: 1.1rem;" onclick="openAuth('signup')">JOIN & SIGN UP &rarr;</button>
             </div>
 
             <!-- CANLI POST AKIŞI (SADECE SON 5 POST) -->
             <div style="margin-top: 80px; padding-top: 40px; border-top: 2px dashed rgba(255,0,51,0.3);">
                 <h2 style="font-family: var(--font-serif); font-size: 2rem; color: white; margin-bottom: 10px; text-align: center;">LATEST UPDATES</h2>
-                <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px;">The newest creations across the universe.</p>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px;">The newest 5 creations across the universe.</p>
                 
                 <div id="communityFeed" class="feed-container">
                     <p style="text-align:center; color: var(--text-muted);">Loading universe data...</p>
@@ -512,7 +512,7 @@
                 <p id="archiveSubtitle" class="archive-subtitle">Explore stories written by the community.</p>
             </div>
             <div>
-                <button id="archiveAddBtn" class="btn" style="background: linear-gradient(45deg, #0055ff, #0099ff); font-size: 1.1rem; box-shadow: 0 5px 15px rgba(0,102,255,0.4);" onclick="document.getElementById('newPostBtn').click()">+ Add a Fic</button>
+                <button id="archiveAddBtn" class="btn" style="background: linear-gradient(45deg, #0055ff, #0099ff); font-size: 1.1rem; box-shadow: 0 5px 15px rgba(0,102,255,0.4);" onclick="openPostPanel()">+ Add a Fic</button>
             </div>
         </div>
 
@@ -548,7 +548,7 @@
     <!-- Modallar (Auth, Post, vs.) -->
     <div id="authModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" id="closeAuthBtn">&times;</span>
+            <span class="close-btn" onclick="closeModal('authModal')">&times;</span>
             <h2 id="authTitle">Sign Up</h2>
             <p id="authSubtitle" style="text-align: center; margin-bottom: 20px; color: var(--text-muted); font-size: 0.9rem;">Create an account to join the community.</p>
             <div id="authError"></div>
@@ -559,14 +559,14 @@
             </form>
             <p style="text-align: center; margin-top: 20px; font-size: 0.85rem;">
                 <span id="authToggleText">Already have an account?</span> 
-                <span id="switchAuthModeBtn" style="color: var(--accent-red); font-weight: bold; cursor: pointer; text-decoration: underline;">Switch</span>
+                <span style="color: var(--accent-red); font-weight: bold; cursor: pointer; text-decoration: underline;" onclick="openAuth(window.currentAuthMode === 'signup' ? 'login' : 'signup')">Switch</span>
             </p>
         </div>
     </div>
 
     <div id="postModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" id="closePostBtn">&times;</span>
+            <span class="close-btn" onclick="closeModal('postModal')">&times;</span>
             <h2>Share a Creation</h2>
             <p style="text-align: center; margin-bottom: 20px; color: var(--text-muted); font-size: 0.9rem;">Contribute to the PerthSanta Universe.</p>
             <div id="postMessage"></div>
@@ -696,6 +696,8 @@
         window.sharePost = function(link) {
             navigator.clipboard.writeText(link).then(() => {
                 alert("Link copied! Ready to share with the fandom.");
+            }).catch(() => {
+                alert("Please copy this link manually: " + link);
             });
         }
 
@@ -705,11 +707,10 @@
             if (post.category === "Fan Game") badgeColor = "#0066cc";
             if (post.category === "Discussion") badgeColor = "#ff9900";
 
-            // Etiketler bölümü (Vibe eklendi)
             return `
                 <div class="feed-card glass-card" style="display: flex; flex-direction: column;">
                     <div class="feed-header">
-                        <div style="display: flex; gap: 10px; align-items: center;">
+                        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                             <span class="feed-category" style="background: ${badgeColor};">${post.category}</span>
                             <span class="vibe-badge">${post.vibe || 'General 📌'}</span>
                         </div>
@@ -743,41 +744,34 @@
         }
 
 
-        // -- MODAL & AUTH KONTROLLERİ --
-        const authModal = document.getElementById('authModal');
-        const postModal = document.getElementById('postModal');
-        let currentAuthMode = 'login';
+        // -- MODAL & AUTH KONTROLLERİ (GLOBAL) --
+        window.currentAuthMode = 'login';
         
-        function openAuth(mode) {
-            currentAuthMode = mode;
+        window.openAuth = function(mode) {
+            window.currentAuthMode = mode;
             document.getElementById('authTitle').innerText = mode === 'signup' ? 'Sign Up' : 'Log In';
             document.getElementById('authSubtitle').innerText = mode === 'signup' ? 'Create an account to join the community.' : 'Welcome back to the universe.';
             document.getElementById('authSubmitBtn').innerText = mode === 'signup' ? 'SIGN UP' : 'LOG IN';
             document.getElementById('authToggleText').innerText = mode === 'signup' ? 'Already have an account?' : 'Need an account?';
             document.getElementById('authError').innerText = '';
-            authModal.style.display = 'block';
+            document.getElementById('authModal').style.display = 'block';
         }
-
-        document.getElementById('topLoginBtn').addEventListener('click', () => openAuth('login'));
-        document.getElementById('bottomSignupBtn').addEventListener('click', () => openAuth('signup'));
-        document.getElementById('closeAuthBtn').addEventListener('click', () => authModal.style.display = 'none');
         
-        document.getElementById('newPostBtn').addEventListener('click', () => {
+        window.openPostPanel = function() {
             const pageTitle = document.getElementById('archiveTitle').innerText;
             const categorySelect = document.getElementById('postCategory');
-            if(archivePageView.style.display === 'block') {
+            
+            if(document.getElementById('archivePageView').style.display === 'block') {
                 if(pageTitle.includes('Fic')) categorySelect.value = "Fan Fiction";
                 else if(pageTitle.includes('Interactive')) categorySelect.value = "Fan Game";
                 else if(pageTitle.includes('Discussions')) categorySelect.value = "Discussion";
             } else {
                 categorySelect.value = "";
             }
-            postModal.style.display = 'block';
-        });
-        
-        document.getElementById('closePostBtn').addEventListener('click', () => postModal.style.display = 'none');
-        document.getElementById('switchAuthModeBtn').addEventListener('click', () => { openAuth(currentAuthMode === 'signup' ? 'login' : 'signup'); });
+            document.getElementById('postModal').style.display = 'block';
+        }
 
+        // -- 1. GİRİŞ/KAYIT (AUTH) İŞLEMLERİ --
         const authForm = document.getElementById('authForm');
         const submitBtn = document.getElementById('authSubmitBtn');
         const errorDiv = document.getElementById('authError');
@@ -789,20 +783,21 @@
             submitBtn.disabled = true;
             submitBtn.innerText = "WAIT...";
 
-            if (currentAuthMode === 'signup') {
+            if (window.currentAuthMode === 'signup') {
                 createUserWithEmailAndPassword(auth, email, password)
-                    .then(() => { authModal.style.display = 'none'; authForm.reset(); })
+                    .then(() => { document.getElementById('authModal').style.display = 'none'; authForm.reset(); })
                     .catch((error) => { errorDiv.innerText = "Error: " + error.message; submitBtn.disabled = false; submitBtn.innerText = "SIGN UP"; });
             } else {
                 signInWithEmailAndPassword(auth, email, password)
-                    .then(() => { authModal.style.display = 'none'; authForm.reset(); })
+                    .then(() => { document.getElementById('authModal').style.display = 'none'; authForm.reset(); })
                     .catch(() => { errorDiv.innerText = "Invalid email or password."; submitBtn.disabled = false; submitBtn.innerText = "LOG IN"; });
             }
         });
 
         onAuthStateChanged(auth, (user) => {
             submitBtn.disabled = false;
-            submitBtn.innerText = currentAuthMode === 'signup' ? 'SIGN UP' : 'LOG IN';
+            submitBtn.innerText = window.currentAuthMode === 'signup' ? 'SIGN UP' : 'LOG IN';
+            
             if (user) {
                 document.getElementById('loginNavLi').style.display = 'none';
                 document.getElementById('userPanelLi').style.display = 'flex';
@@ -816,7 +811,9 @@
             }
         });
 
-        document.getElementById('logoutBtn').addEventListener('click', () => { signOut(auth); });
+        window.logoutUser = function() {
+            signOut(auth).then(() => alert("Logged out successfully."));
+        }
 
         // -- YENİ POST GÖNDERME --
         const postForm = document.getElementById('postForm');
@@ -849,7 +846,7 @@
                 postMessage.innerText = "Awesome! Your post has been successfully added to the universe.";
                 postForm.reset();
                 setTimeout(() => {
-                    postModal.style.display = 'none';
+                    document.getElementById('postModal').style.display = 'none';
                     postMessage.innerText = "";
                     postSubmitBtn.disabled = false;
                     postSubmitBtn.innerText = "SHARE WITH COMMUNITY";
@@ -892,7 +889,7 @@
             });
 
             // EĞER ARŞİV SAYFASI AÇIKSA, ORAYI DA GÜNCELLE
-            if(archivePageView.style.display === 'block') {
+            if(document.getElementById('archivePageView').style.display === 'block') {
                 const currentTitle = document.getElementById('archiveTitle').innerText;
                 let cat = "Discussion";
                 if(currentTitle.includes('Fic')) cat = "Fan Fiction";
@@ -913,7 +910,7 @@
         }
     </script>
 
-    <!-- UI Fonksiyonları -->
+    <!-- Normal UI Fonksiyonları (Modallar) -->
     <script>
         function toggleSection(id) {
             const section = document.getElementById(id);
@@ -926,6 +923,11 @@
         }
         function openModal(id) { document.getElementById(id).style.display = "block"; }
         function closeModal(id) { document.getElementById(id).style.display = "none"; }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
     </script>
 </body>
 </html>
